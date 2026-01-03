@@ -1,9 +1,9 @@
 {
   "personal": {
     "nombre": "Juan Camilo Marin Segura",
-    "alias": ["Camilo Marin", "Tio de Matías"],
-    "titulo": "Frontend Emprendedor",
-    "descripcion": "Quiero convertirme en un desarrollador de software, emprendedor, inversionista, marketer y un excelente ser humano",
+    "alias": ["Camilo Marin"],
+    "titulo": "Full Stack Developer",
+    "descripcion": "Full Stack Developer apasionado por crear productos digitales que impacten positivamente. Experiencia en startups, desarrollo web y móvil, con enfoque en JavaScript, TypeScript, React y Angular.",
     "ubicacion": {
       "ciudad": "Bogotá",
       "pais": "Colombia"
@@ -11,7 +11,7 @@
     "contacto": {
       "email": "tiodematias@gmail.com",
       "whatsapp": "+573124860738",
-      "linkedin": "https://www.linkedin.com/in/tiodematias",
+      "linkedin": "https://www.linkedin.com/in/camilo-marin",
       "github": "https://github.com/tiodematias",
       "website": "https://tiodematias.co",
       "blog": "https://blog.tiodematias.com"
@@ -19,7 +19,9 @@
     "estadisticas": {
       "proyectos_completados": 56,
       "clientes_atendidos": 46,
-      "socios_comerciales": 4
+      "socios_comerciales": 4,
+      "conexiones_linkedin": 437,
+      "recomendaciones": 6
     }
   },
   "servicios": [
@@ -56,13 +58,15 @@
   ],
   "habilidades": {
     "frontend": [
-      { "nombre": "Git/Github", "nivel": 100 },
-      { "nombre": "Tailwind CSS", "nivel": 100 },
+      { "nombre": "JavaScript", "nivel": 90 },
+      { "nombre": "TypeScript", "nivel": 85 },
+      { "nombre": "React.js", "nivel": 85 },
+      { "nombre": "Angular", "nivel": 80 },
       { "nombre": "HTML5", "nivel": 100 },
       { "nombre": "CSS3", "nivel": 100 },
+      { "nombre": "Tailwind CSS", "nivel": 100 },
       { "nombre": "Vue.js", "nivel": 80 },
-      { "nombre": "React.js", "nivel": 70 },
-      { "nombre": "JavaScript", "nivel": 50 }
+      { "nombre": "Git/Github", "nivel": 100 }
     ],
     "backend": [
       { "nombre": "Ruby on Rails", "nivel": 80 },
@@ -80,6 +84,14 @@
     ]
   },
   "experiencia": [
+    {
+      "empresa": "Kiddy",
+      "cargo": "Full Stack Developer",
+      "periodo": { "inicio": "2021", "fin": "Presente" },
+      "tipo": "Startup / EdTech",
+      "descripcion": "Desarrollo Full Stack en startup que transforma cómo las familias acceden a experiencias educativas y recreativas para niños. Plataforma con app móvil y web para descubrir actividades por edad y ubicación.",
+      "tecnologias": ["JavaScript", "TypeScript", "Angular", "React"]
+    },
     {
       "empresa": "IQTHINK",
       "cargo": "Desarrollador Frontend",
@@ -146,6 +158,13 @@
   ],
   "proyectos": [
     {
+      "nombre": "Kiddy",
+      "tipo": "Startup",
+      "descripcion": "Plataforma que conecta familias con experiencias educativas y recreativas para niños. App móvil y web para descubrir actividades por edad y ubicación en Bogotá.",
+      "tecnologias": ["JavaScript", "TypeScript", "Angular", "React", "Node.js"],
+      "url": "https://www.kiddy.com.co"
+    },
+    {
       "nombre": "AMP (Accelerated Mobile Pages)",
       "tipo": "Experimento",
       "descripcion": "Experimentación con el framework AMP de Google",
@@ -197,15 +216,23 @@
   "educacion": {
     "formal": [
       {
-        "institucion": "Universidad",
-        "titulo": "Ingeniería de Sistemas",
-        "estado": "En progreso"
+        "institucion": "Platzi",
+        "titulo": "Escuela de Desarrollo Web y JavaScript",
+        "estado": "Completado"
+      }
+    ],
+    "certificaciones": [
+      {
+        "nombre": "Implementing Cisco Application Centric Infrastructure (DCACI)",
+        "emisor": "Cisco",
+        "año": "2024"
       }
     ],
     "informal": [
-      "Cursos de programación autodidacta",
-      "Certificaciones en marketing digital",
-      "Cursos de machine learning"
+      "Cursos de programación en Platzi",
+      "Certificaciones en desarrollo Full Stack",
+      "Cursos de TypeScript y Angular",
+      "Cursos de React avanzado"
     ]
   },
   "idiomas": [
