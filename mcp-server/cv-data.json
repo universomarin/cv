@@ -1,0 +1,247 @@
+{
+  "personal": {
+    "nombre": "Juan Camilo Marin Segura",
+    "alias": ["Camilo Marin"],
+    "titulo": "Full Stack Developer",
+    "descripcion": "Full Stack Developer apasionado por crear productos digitales que impacten positivamente. Experiencia en startups, desarrollo web y móvil, con enfoque en JavaScript, TypeScript, React y Angular.",
+    "ubicacion": {
+      "ciudad": "Bogotá",
+      "pais": "Colombia"
+    },
+    "contacto": {
+      "email": "tiodematias@gmail.com",
+      "whatsapp": "+573124860738",
+      "linkedin": "https://www.linkedin.com/in/camilo-marin",
+      "github": "https://github.com/tiodematias",
+      "website": "https://tiodematias.co",
+      "blog": "https://blog.tiodematias.com"
+    },
+    "estadisticas": {
+      "proyectos_completados": 56,
+      "clientes_atendidos": 46,
+      "socios_comerciales": 4,
+      "conexiones_linkedin": 437,
+      "recomendaciones": 6
+    }
+  },
+  "servicios": [
+    {
+      "id": "web-development",
+      "nombre": "Desarrollo Web",
+      "descripcion": "Creación de sitios y aplicaciones web usando HTML, CSS y JavaScript",
+      "tecnologias": ["HTML5", "CSS3", "JavaScript", "Vue.js", "React.js", "Tailwind CSS"]
+    },
+    {
+      "id": "mobile-development",
+      "nombre": "Desarrollo Móvil",
+      "descripcion": "Desarrollo de aplicaciones móviles nativas e híbridas",
+      "tecnologias": ["React Native", "Flutter"]
+    },
+    {
+      "id": "digital-marketing",
+      "nombre": "Marketing Digital",
+      "descripcion": "Estrategias de marketing digital completas",
+      "especialidades": ["Social Media", "Facebook Ads", "Google Ads", "SEO", "Growth Hacking"]
+    },
+    {
+      "id": "design",
+      "nombre": "Diseño",
+      "descripcion": "Creación de marca y material de marketing",
+      "herramientas": ["Photoshop", "Illustrator", "Figma"]
+    },
+    {
+      "id": "ai",
+      "nombre": "Inteligencia Artificial",
+      "descripcion": "Implementación de soluciones con Machine Learning y Deep Learning",
+      "especialidades": ["Machine Learning", "Neural Networks", "Deep Learning", "Data Analysis"]
+    }
+  ],
+  "habilidades": {
+    "frontend": [
+      { "nombre": "JavaScript", "nivel": 90 },
+      { "nombre": "TypeScript", "nivel": 85 },
+      { "nombre": "React.js", "nivel": 85 },
+      { "nombre": "Angular", "nivel": 80 },
+      { "nombre": "HTML5", "nivel": 100 },
+      { "nombre": "CSS3", "nivel": 100 },
+      { "nombre": "Tailwind CSS", "nivel": 100 },
+      { "nombre": "Vue.js", "nivel": 80 },
+      { "nombre": "Git/Github", "nivel": 100 }
+    ],
+    "backend": [
+      { "nombre": "Ruby on Rails", "nivel": 80 },
+      { "nombre": "Django", "nivel": 60 },
+      { "nombre": "Python", "nivel": 60 },
+      { "nombre": "GraphQL", "nivel": 50 },
+      { "nombre": "Firebase", "nivel": 70 }
+    ],
+    "otras": [
+      { "nombre": "Ventas", "nivel": 50 },
+      { "nombre": "Data Visualization", "nivel": 60 },
+      { "nombre": "Google Maps API", "nivel": 70 },
+      { "nombre": "AWS", "nivel": 40 },
+      { "nombre": "Google Cloud", "nivel": 50 }
+    ]
+  },
+  "experiencia": [
+    {
+      "empresa": "Kiddy",
+      "cargo": "Full Stack Developer",
+      "periodo": { "inicio": "2021", "fin": "Presente" },
+      "tipo": "Startup / EdTech",
+      "descripcion": "Desarrollo Full Stack en startup que transforma cómo las familias acceden a experiencias educativas y recreativas para niños. Plataforma con app móvil y web para descubrir actividades por edad y ubicación.",
+      "tecnologias": ["JavaScript", "TypeScript", "Angular", "React"]
+    },
+    {
+      "empresa": "IQTHINK",
+      "cargo": "Desarrollador Frontend",
+      "periodo": { "inicio": "2020", "fin": "2021" },
+      "tipo": "Agencia Creativa",
+      "descripcion": "Desarrollo web en agencia creativa"
+    },
+    {
+      "empresa": "Universal Trip",
+      "cargo": "Consultor SEO",
+      "periodo": { "inicio": "2018", "fin": "2018" },
+      "tipo": "Turismo",
+      "descripcion": "Arquitectura SEO para agencia de viajes mayorista"
+    },
+    {
+      "empresa": "SitiosPro",
+      "cargo": "Co-fundador",
+      "periodo": { "inicio": "2018", "fin": "2018" },
+      "tipo": "Real Estate / Emprendimiento",
+      "descripcion": "Marketplace inmobiliario"
+    },
+    {
+      "empresa": "Terranoa",
+      "cargo": "Co-fundador & Desarrollador",
+      "periodo": { "inicio": "2017", "fin": "2017" },
+      "tipo": "Real Estate / Emprendimiento",
+      "descripcion": "Herramienta de búsqueda inmobiliaria con React y GraphQL"
+    },
+    {
+      "empresa": "Veeci",
+      "cargo": "Desarrollador",
+      "periodo": { "inicio": "2017", "fin": "2017" },
+      "tipo": "Fintech",
+      "descripcion": "Aplicación de contabilidad para pequeños negocios"
+    },
+    {
+      "empresa": "Cajuu",
+      "cargo": "Marketing Digital",
+      "periodo": { "inicio": "2017", "fin": "2017" },
+      "tipo": "Agencia de Marketing",
+      "descripcion": "Estrategias de marketing digital"
+    },
+    {
+      "empresa": "Refasil",
+      "cargo": "Desarrollador Full Stack",
+      "periodo": { "inicio": "2017", "fin": "2017" },
+      "tipo": "EdTech",
+      "descripcion": "Plataforma educativa musical con Django, Firebase y GCP"
+    },
+    {
+      "empresa": "Buffalo Ciclismo",
+      "cargo": "Desarrollador Móvil",
+      "periodo": { "inicio": "2015", "fin": "2015" },
+      "tipo": "IoT / Deportes",
+      "descripcion": "Primera aplicación móvil - bicicletas inteligentes"
+    },
+    {
+      "empresa": "JL Hernandez",
+      "cargo": "Consultor de Seguros",
+      "periodo": { "inicio": "2013", "fin": "2013" },
+      "tipo": "Seguros",
+      "descripcion": "Consultoría en seguros"
+    }
+  ],
+  "proyectos": [
+    {
+      "nombre": "Kiddy",
+      "tipo": "Startup",
+      "descripcion": "Plataforma que conecta familias con experiencias educativas y recreativas para niños. App móvil y web para descubrir actividades por edad y ubicación en Bogotá.",
+      "tecnologias": ["JavaScript", "TypeScript", "Angular", "React", "Node.js"],
+      "url": "https://www.kiddy.com.co"
+    },
+    {
+      "nombre": "AMP (Accelerated Mobile Pages)",
+      "tipo": "Experimento",
+      "descripcion": "Experimentación con el framework AMP de Google",
+      "tecnologias": ["AMP", "HTML"]
+    },
+    {
+      "nombre": "Three.js",
+      "tipo": "Experimento",
+      "descripcion": "Experimentación con gráficos 3D",
+      "tecnologias": ["Three.js", "JavaScript", "WebGL"]
+    },
+    {
+      "nombre": "ConvNetJS",
+      "tipo": "Experimento",
+      "descripcion": "Experimentación con redes neuronales",
+      "tecnologias": ["ConvNetJS", "Machine Learning"]
+    },
+    {
+      "nombre": "AR Studio",
+      "tipo": "Experimento",
+      "descripcion": "Experimentación con realidad aumentada de Facebook",
+      "tecnologias": ["AR Studio", "Augmented Reality"]
+    },
+    {
+      "nombre": "Universal Trip",
+      "tipo": "Consultoría",
+      "descripcion": "Agencia de reservas de viajes - Consulting, branding, ilustración",
+      "tecnologias": ["SEO", "Branding"]
+    },
+    {
+      "nombre": "Divorya",
+      "tipo": "Empresa",
+      "descripcion": "Plataforma de servicios legales",
+      "tecnologias": ["Web Development"]
+    },
+    {
+      "nombre": "SitiosPro",
+      "tipo": "Emprendimiento",
+      "descripcion": "Marketplace inmobiliario",
+      "tecnologias": ["React", "GraphQL"]
+    },
+    {
+      "nombre": "RA Fiestas Infantiles",
+      "tipo": "Consultoría",
+      "descripcion": "Empresa de fiestas infantiles - Business consulting & marketing",
+      "tecnologias": ["Marketing Digital"]
+    }
+  ],
+  "educacion": {
+    "formal": [
+      {
+        "institucion": "Platzi",
+        "titulo": "Escuela de Desarrollo Web y JavaScript",
+        "estado": "Completado"
+      }
+    ],
+    "certificaciones": [
+      {
+        "nombre": "Implementing Cisco Application Centric Infrastructure (DCACI)",
+        "emisor": "Cisco",
+        "año": "2024"
+      }
+    ],
+    "informal": [
+      "Cursos de programación en Platzi",
+      "Certificaciones en desarrollo Full Stack",
+      "Cursos de TypeScript y Angular",
+      "Cursos de React avanzado"
+    ]
+  },
+  "idiomas": [
+    { "idioma": "Español", "nivel": "Nativo" },
+    { "idioma": "Inglés", "nivel": "Intermedio-Avanzado" }
+  ],
+  "disponibilidad": {
+    "tipo": ["Tiempo completo", "Freelance", "Consultoría", "Proyectos"],
+    "modalidad": ["Remoto", "Híbrido", "Presencial"],
+    "ubicacion_preferida": "Bogotá, Colombia (con disponibilidad remota global)"
+  }
+}
