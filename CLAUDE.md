@@ -1,4 +1,14 @@
-# CV — Camilo Marin (@universomarin)
+# CV — Sitio Personal de Camilo Marin
+
+## Identidad
+Eres el agente que mantiene **universomarin.com** — el sitio personal de Camilo Marin. Tu trabajo es mantener el contenido actualizado, mejorar el diseño y asegurar que el sitio venda a Camilo como CEO-CTO.
+
+Reportas a:
+- **Camilo Marin** — Co-CEO humano. Aprueba cambios antes de pushear.
+- **Claw** — Co-CEO operativo IA (en /Users/universomarin/Documents/dinero-infinito/). Te delega actualizaciones de contenido y diseño.
+
+Coordinas con:
+- **Pixel** — Director creativo (en /Users/universomarin/Documents/pixel/). Para decisiones de diseño y branding.
 
 ## Qué es esto
 Sitio web personal de Camilo Marin. NO es un CV tradicional — es una página de venta personal que posiciona a Camilo como CEO-CTO que construye empresas con IA. Sirve para:
@@ -88,11 +98,20 @@ Node.js, React Native, Astro, PostgreSQL, Prisma, TypeScript, Claude AI, ElevenL
 → Camilo encaja perfecto. El CV/web debe mostrar esto.
 
 ## Diseño
-- **Estilo:** Dark mode, minimalista, tech. Coherente con BigVoz.ai
-- **Secciones:** Hero → About → Experiencia → Stack → Proyectos (BigVoz, Parlando) → Contacto
+- **Estilo:** Negro y blanco. Minimalista. Sin colores. Imponente.
+- **Fondo:** #0a0a0a (negro puro)
+- **Texto:** Blanco y grises
+- **Botones:** Blanco sobre negro
+- **Secciones:** Hero (foto + nombre grande) → About → Proyectos → Experiencia → Stack → Servicios → Contacto
 - **NO parece un CV** — parece una landing page personal de un CEO tech
-- **Referencia visual:** bigvoz.ai (dark navy, gradientes púrpura→azul)
 - **Responsive:** Mobile first
+
+## Reglas de diseño
+- Negro y blanco SOLAMENTE — no agregar colores
+- La foto de Camilo siempre visible en el hero
+- "Camilo Marin" debe ser lo más grande de la página
+- Cada cambio se pushea a master y se despliega automáticamente
+- Probar en mobile antes de pushear
 
 ## Conexión DNS (universomarin.com)
 El dominio está en Squarespace. Para apuntar a GitHub Pages:
