@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversoMarin — Plan Dinero Infinito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050507;
+            --dark: #0a0a0f;
+            --dark2: #12121a;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --blue: #3b82f6;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --white: #f5f5f7;
+            --gray: #6b7280;
+            --gray-light: #9ca3af;
+            --border: rgba(255,255,255,0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+
+        .slide {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 80px 64px;
+            position: relative; scroll-snap-align: start;
+        }
+        @media (max-width: 768px) { .slide { padding: 48px 24px; min-height: auto; padding-top: 80px; padding-bottom: 80px; } }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(5,5,7,0.85); backdrop-filter: blur(24px);
+            padding: 16px 64px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        nav .brand { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; }
+        nav .brand span { color: var(--accent-light); }
+        nav .nav-r { font-size: 11px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+        @media (max-width: 768px) { nav { padding: 14px 24px; } }
+
+        .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: var(--accent-light); margin-bottom: 16px; }
+        .headline {
+            font-family: 'Space Grotesk'; font-weight: 700;
+            font-size: clamp(32px, 5vw, 60px);
+            line-height: 1.05; letter-spacing: -2px; margin-bottom: 24px;
+        }
+        .headline .grad { background: linear-gradient(135deg, var(--accent-light), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .headline .green { color: var(--green); }
+        .headline .amber { color: var(--amber); }
+        .subtext { font-size: 17px; color: var(--gray-light); line-height: 1.7; max-width: 600px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 16px; padding: 28px; transition: all 0.3s;
+        }
+        .card:hover { border-color: rgba(99,102,241,0.3); }
+        .card h3 { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .card p { font-size: 13px; color: var(--gray-light); line-height: 1.6; }
+        .card .meta { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .card .number { font-family: 'Space Grotesk'; font-size: 28px; font-weight: 700; margin-top: 12px; }
+
+        .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+        .badge-green { background: var(--green-dim); color: var(--green); }
+        .badge-amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+        .badge-blue { background: rgba(59,130,246,0.12); color: var(--blue); }
+        .badge-purple { background: var(--accent-glow); color: var(--accent-light); }
+        .badge-red { background: rgba(239,68,68,0.12); color: var(--red); }
+
+        .flow { display: flex; flex-direction: column; gap: 0; margin-top: 40px; max-width: 700px; }
+        .flow-step {
+            display: flex; align-items: flex-start; gap: 20px;
+            padding: 18px 0 18px 28px; border-left: 2px solid rgba(99,102,241,0.15);
+            position: relative;
+        }
+        .flow-step::before {
+            content: ''; position: absolute; left: -6px; top: 22px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent); box-shadow: 0 0 12px var(--accent-glow);
+        }
+        .flow-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+        .flow-step p { font-size: 13px; color: var(--gray-light); line-height: 1.5; }
+
+        .big-number { font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(40px, 7vw, 72px); line-height: 1; }
+
+        .compare { width: 100%; border-collapse: collapse; margin-top: 32px; }
+        .compare th, .compare td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .compare th { color: var(--gray); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .compare .us { color: var(--green); font-weight: 700; }
+        .compare .them { color: var(--gray); }
+
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent); color: white;
+            padding: 16px 36px; border-radius: 10px;
+            font-size: 15px; font-weight: 700; transition: all 0.2s; margin-top: 32px;
+        }
+        .cta-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+        .divider { width: 48px; height: 2px; background: var(--accent); margin: 24px 0; }
+
+        .agent-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 32px; }
+        .agent-chip {
+            padding: 12px 16px; background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 10px; text-align: center; font-size: 12px;
+        }
+        .agent-chip .name { font-weight: 700; color: var(--white); }
+        .agent-chip .role { color: var(--gray); font-size: 10px; margin-top: 2px; }
+        .agent-chip .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-right: 4px; }
+        @media (max-width: 768px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .vox-glow {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="brand">Universo<span>Marin</span></div>
+    <div class="nav-r">Plan Dinero Infinito — Confidencial 2026</div>
+</nav>
+
+<!-- ===== 1. COVER ===== -->
+<section class="slide" style="text-align: center; align-items: center;">
+    <div class="tag">Presentación para aliados estratégicos</div>
+    <h1 class="headline" style="max-width: 900px;">
+        Construimos el <span class="grad">ElevenLabs de LATAM</span><br>con un equipo de agentes IA
+    </h1>
+    <p class="subtext" style="text-align: center; margin: 0 auto;">
+        5 empresas de inteligencia artificial. 4 países. Construido desde cero con un método propio: un equipo de 17 agentes IA operando como una empresa real.
+    </p>
+    <div class="divider" style="margin: 32px auto;"></div>
+    <p style="font-size: 14px; color: var(--gray);">Camilo Marín — CEO & Founder UniversoMarin</p>
+</section>
+
+<!-- ===== 2. EL METODO: HOLDINGCHAT ===== -->
+<section class="slide">
+    <div class="tag">Cómo lo construí</div>
+    <h2 class="headline">17 agentes IA. Cada uno con un <span class="grad">rol real</span>.</h2>
+    <p class="subtext">No contraté un equipo humano. Construí un equipo de agentes IA con Claude Code, cada uno con un rol específico, operando 24/7 en una plataforma propia: HoldingChat.</p>
+    <div class="agent-grid">
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Claw</span></div><div class="role">Co-CEO Operativo</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Tyler</span></div><div class="role">SDR — Ventas</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Gaston</span></div><div class="role">CTO BigVoz</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Vivi</span></div><div class="role">Developer</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Wanda</span></div><div class="role">UX/UI Designer</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Lena</span></div><div class="role">CMO Marketing</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Victor</span></div><div class="role">CFO/COO</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Dona</span></div><div class="role">Secretaria Ejecutiva</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Creator</span></div><div class="role">Dir. Contenido</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Pixel</span></div><div class="role">Dir. Creativo</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Ingresos</span></div><div class="role">CFO Revenue</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Egresos</span></div><div class="role">CFO Expenses</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Oráculo</span></div><div class="role">Consejero Futurista</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">BigVoz Dir.</span></div><div class="role">Dir. Comercial</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">Claw Daemon</span></div><div class="role">WhatsApp Agent</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">CV Agent</span></div><div class="role">Mantenedor Web</div></div>
+        <div class="agent-chip"><div><span class="dot"></span><span class="name">SuperBotón</span></div><div class="role">IoT Automation</div></div>
+    </div>
+    <p style="margin-top: 24px; font-size: 14px; color: var(--gray);">Cada agente tiene contexto, memoria, herramientas y un board de tareas. Operan en sprints semanales. HoldingChat es el producto — y el método.</p>
+</section>
+
+<!-- ===== 3. EL PROBLEMA ===== -->
+<section class="slide">
+    <div class="tag">El problema</div>
+    <h2 class="headline">LATAM depende de proveedores de IA <span class="grad">extranjeros y caros</span></h2>
+    <p class="subtext">Toda empresa que quiere usar IA de voz hoy paga en dólares a proveedores de USA/Europa. No existe una alternativa local.</p>
+    <table class="compare" style="margin-top: 40px; max-width: 800px;">
+        <thead><tr><th>Proveedor</th><th>Servicio</th><th>Ubicación</th><th>Limitación</th></tr></thead>
+        <tbody>
+            <tr><td>ElevenLabs</td><td>TTS (texto a voz)</td><td class="them">USA / Europa</td><td class="them">Caro, español no nativo</td></tr>
+            <tr><td>Palabra.ai</td><td>TTS español</td><td class="them">USA</td><td class="them">Solo TTS, no STS ni NLP</td></tr>
+            <tr><td>Twilio</td><td>Telefonía + voz</td><td class="them">USA</td><td class="them">Complejo, no pensado para LATAM</td></tr>
+            <tr><td>Google Cloud TTS</td><td>TTS</td><td class="them">Global</td><td class="them">Voces robóticas en español</td></tr>
+            <tr><td>Amazon Polly</td><td>TTS</td><td class="them">Global</td><td class="them">Calidad baja en español</td></tr>
+            <tr style="background: var(--green-dim);"><td style="color: var(--green); font-weight: 700;">InfinitoVox</td><td style="color: var(--green);">TTS + STS + NLP</td><td class="us">LATAM (propio)</td><td class="us">Español nativo, todo-en-uno, competitivo</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ===== 4. LA SOLUCION: INFINITOVOX ===== -->
+<section class="slide" style="align-items: center; text-align: center;">
+    <div class="vox-glow"></div>
+    <div class="tag">La solución</div>
+    <h2 class="headline" style="max-width: 800px;">
+        <span class="grad">InfinitoVox</span><br>
+        Proveedor de IA de voz para LATAM
+    </h2>
+    <p class="subtext" style="text-align: center; margin: 0 auto 40px;">
+        Servidor GPU propio. Modelos TTS, STS y NLP entrenados para español nativo con acentos regionales. Cobramos por minuto. Reemplazamos a ElevenLabs, Twilio y Palabra.ai con una sola plataforma.
+    </p>
+    <div class="grid-3" style="max-width: 900px;">
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 12px;">&#128483;</div>
+            <h3>TTS — Texto a Voz</h3>
+            <p>Voces naturales en español, portugués, inglés. Clonación de voz. Acentos colombiano, mexicano, argentino.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 12px;">&#128260;</div>
+            <h3>STS — Voz a Voz</h3>
+            <p>Traducción e interpretación en tiempo real. Intérpretes IA para eventos, reuniónes y call centers.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 12px;">&#129504;</div>
+            <h3>NLP — Lenguaje Natural</h3>
+            <p>Comprensión de contexto e intención. Agentes que conversan, venden y resuelven problemas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 5. FLUJO TECNICO ===== -->
+<section class="slide">
+    <div class="tag">Cómo funciona</div>
+    <h2 class="headline">El flujo de InfinitoVox en <span class="grad">acción</span></h2>
+
+    <!-- FLUJO 1: EVENTO MULTIIDIOMA -->
+    <div style="margin-top: 40px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--accent-light); margin-bottom: 20px;">Caso 1: Evento corporativo con múltiples idiomas</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#127908;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Speaker habla</div>
+                <div style="font-size: 11px; color: var(--gray);">Español</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(59,130,246,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128260;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--blue);">STT</div>
+                <div style="font-size: 11px; color: var(--gray);">Voz → Texto</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(99,102,241,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#129504;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--accent-light);">NLP</div>
+                <div style="font-size: 11px; color: var(--gray);">Traduce + contexto</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(34,197,94,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128483;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--green);">TTS</div>
+                <div style="font-size: 11px; color: var(--gray);">Texto → Voz natural</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#127911;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Audiencia escucha</div>
+                <div style="font-size: 11px; color: var(--gray);">Inglés, portugués, francés...</div>
+            </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--gray-light);">Todo en tiempo real. Latencia mínima. Cada asistente elige su idioma. Sin intérpretes humanos en cabina.</p>
+    </div>
+
+    <!-- FLUJO 2: AGENTE IA -->
+    <div style="margin-top: 48px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--accent-light); margin-bottom: 20px;">Caso 2: Agente de voz IA atendiendo clientes</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128222;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Cliente llama</div>
+                <div style="font-size: 11px; color: var(--gray);">Teléfono o WhatsApp</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(59,130,246,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128260;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--blue);">STT</div>
+                <div style="font-size: 11px; color: var(--gray);">Escucha y transcribe</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(99,102,241,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#129504;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--accent-light);">NLP</div>
+                <div style="font-size: 11px; color: var(--gray);">Entiende intención, decide acción</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px; border-color: rgba(34,197,94,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128483;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--green);">TTS</div>
+                <div style="font-size: 11px; color: var(--gray);">Responde con voz natural</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 140px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#9989;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Acción ejecutada</div>
+                <div style="font-size: 11px; color: var(--gray);">Agenda, vende, resuelve</div>
+            </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--gray-light);">El agente escucha, entiende, responde y ejecuta. 24/7. En cualquier idioma. Sin intervención humana.</p>
+    </div>
+
+    <!-- STS DIRECTO -->
+    <div style="margin-top: 48px;">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--accent-light); margin-bottom: 20px;">Caso 3: STS directo — Voz a voz sin texto intermedio</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <div class="card" style="flex: 1; min-width: 180px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#127908;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Persona habla en español</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 180px; text-align: center; padding: 20px; border-color: rgba(245,158,11,0.3);">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#128260;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--amber);">STS — Speech to Speech</div>
+                <div style="font-size: 11px; color: var(--gray);">Modelo end-to-end, sin pasos intermedios</div>
+            </div>
+            <div style="color: var(--accent-light); font-size: 20px;">&#8594;</div>
+            <div class="card" style="flex: 1; min-width: 180px; text-align: center; padding: 20px;">
+                <div style="font-size: 24px; margin-bottom: 8px;">&#127911;</div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--white);">Sale en inglés con voz natural</div>
+            </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--gray-light);">La latencia más baja posible. El modelo convierte voz a voz directamente, preservando tono, emoción y velocidad del hablante original.</p>
+    </div>
+</section>
+
+<!-- ===== 6. ARQUITECTURA TECNICA ===== -->
+<section class="slide">
+    <div class="tag">Arquitectura técnica</div>
+    <h2 class="headline">Ya tenemos el servidor <span class="grad">configurado</span></h2>
+    <p class="subtext">NVIDIA Riva + modelos open source. Docker containerizado. 5 microservicios independientes listos para escalar.</p>
+
+    <div class="grid-2" style="margin-top: 40px;">
+        <div>
+            <h3 style="font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;">Microservicios del servidor</h3>
+            <table class="compare">
+                <thead><tr><th>Servicio</th><th>Tecnología</th><th>Función</th></tr></thead>
+                <tbody>
+                    <tr><td style="color: var(--blue); font-weight: 700;">ASR</td><td>Whisper / Parakeet</td><td>Voz → Texto (99 idiomas)</td></tr>
+                    <tr><td style="color: var(--accent-light); font-weight: 700;">NMT</td><td>Nemotron / NLLB-200</td><td>Traducción (200+ idiomas)</td></tr>
+                    <tr><td style="color: var(--green); font-weight: 700;">TTS</td><td>Cartesia Sonic / Piper</td><td>Texto → Voz (40 idiomas)</td></tr>
+                    <tr><td style="color: var(--amber); font-weight: 700;">Clone</td><td>XTTS-v2</td><td>Clonación de voz (16 idiomas)</td></tr>
+                    <tr><td style="color: var(--white); font-weight: 700;">Router</td><td>Model Router</td><td>Selección dinámica del mejor modelo</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3 style="font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 16px;">Tiers de calidad (automático)</h3>
+            <div class="card" style="padding: 20px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><span class="badge badge-green">Tier 1 — Premium</span><br><span style="font-size: 12px; color: var(--gray-light);">Nemotron + Llama 3.3 + Cartesia</span></div>
+                    <span style="font-size: 12px; color: var(--green);">&lt; 200ms</span>
+                </div>
+            </div>
+            <div class="card" style="padding: 20px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><span class="badge badge-blue">Tier 2 — Alta calidad</span><br><span style="font-size: 12px; color: var(--gray-light);">Whisper + MADLAD-400 + Piper</span></div>
+                    <span style="font-size: 12px; color: var(--blue);">&lt; 350ms</span>
+                </div>
+            </div>
+            <div class="card" style="padding: 20px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><span class="badge badge-amber">Tier 3 — Extendido</span><br><span style="font-size: 12px; color: var(--gray-light);">Whisper + NLLB-200 + Edge-TTS</span></div>
+                    <span style="font-size: 12px; color: var(--amber);">&lt; 500ms</span>
+                </div>
+            </div>
+            <div class="card" style="padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><span class="badge badge-purple">Tier 4 — Clonación</span><br><span style="font-size: 12px; color: var(--gray-light);">MMS-1B + NLLB + XTTS-v2</span></div>
+                    <span style="font-size: 12px; color: var(--accent-light);">&lt; 700ms</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 7. COBERTURA DE IDIOMAS ===== -->
+<section class="slide">
+    <div class="tag">Cobertura global</div>
+    <h2 class="headline">99 idiomas de entrada. 40 voces. <span class="grad">16 con clonación.</span></h2>
+
+    <div class="grid-3" style="margin-top: 40px;">
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 8px;">&#127908;</div>
+            <h3>INPUT — ASR</h3>
+            <div style="font-family: 'Space Grotesk'; font-size: 36px; font-weight: 700; color: var(--blue); margin: 8px 0;">99</div>
+            <p>Idiomas reconocidos. Whisper GPU. Incluye todos los acentos regionales del español (ES, MX, AR, CO, CL, PE, VE, EC, BO).</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 8px;">&#128483;</div>
+            <h3>OUTPUT — TTS</h3>
+            <div style="font-family: 'Space Grotesk'; font-size: 36px; font-weight: 700; color: var(--green); margin: 8px 0;">40</div>
+            <p>Idiomas con voz natural. Edge-TTS + Cartesia Sonic + Piper. Latencia desde 200ms.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 8px;">&#128101;</div>
+            <h3>CLONE — XTTS-v2</h3>
+            <div style="font-family: 'Space Grotesk'; font-size: 36px; font-weight: 700; color: var(--amber); margin: 8px 0;">16</div>
+            <p>Idiomas con clonación de voz. El speaker habla en español, la audiencia escucha su misma voz en inglés.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+        <h3 style="font-size: 14px; font-weight: 700; color: var(--accent-light); margin-bottom: 12px;">Variantes regionales del español</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="tech-tag">ES — España</span>
+            <span class="tech-tag">MX — México</span>
+            <span class="tech-tag">AR — Argentina</span>
+            <span class="tech-tag">CO — Colombia</span>
+            <span class="tech-tag">CL — Chile</span>
+            <span class="tech-tag">PE — Perú</span>
+            <span class="tech-tag">VE — Venezuela</span>
+            <span class="tech-tag">EC — Ecuador</span>
+            <span class="tech-tag">BO — Bolivia</span>
+        </div>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--gray-light);">Combinaciones posibles: 99 idiomas de entrada × 50+ de salida = <strong style="color: var(--white);">4,950+ pares de traducción simultánea</strong></p>
+    </div>
+</section>
+
+<!-- ===== 8. MERCADO INTERPRETES ===== -->
+<section class="slide">
+    <div class="tag">Mercado de intérpretes</div>
+    <h2 class="headline">La IA reemplaza intérpretes humanos a <span class="green">1/10 del costo</span></h2>
+    <p class="subtext">El STS (Speech-to-Speech) de InfinitoVox permite interpretación simultánea en tiempo real. Eventos, conferencias, reuniónes de negocios — sin humanos.</p>
+    <table class="compare" style="margin-top: 40px; max-width: 800px;">
+        <thead><tr><th>Segmento</th><th>Costo humano</th><th>Costo InfinitoVox</th><th>Ahorro</th></tr></thead>
+        <tbody>
+            <tr><td>Eventos y conferencias</td><td class="them">$50-150 USD/hora</td><td class="us">$3-5 USD/hora</td><td class="us">95%</td></tr>
+            <tr><td>Reuniones de negocios</td><td class="them">$30-80 USD/hora</td><td class="us">$3-5 USD/hora</td><td class="us">90%</td></tr>
+            <tr><td>Call centers bilingües</td><td class="them">$8-15 USD/hora (agente)</td><td class="us">$0.05 USD/min (IA)</td><td class="us">80%</td></tr>
+            <tr><td>Turismo y guias</td><td class="them">$20-50 USD/hora</td><td class="us">$3-5 USD/hora</td><td class="us">85%</td></tr>
+        </tbody>
+    </table>
+    <p style="margin-top: 24px; font-size: 14px; color: var(--accent-light);">El mercado global de interpretación vale $10B USD. LATAM es el mercado con mas crecimiento en eventos bilingües.</p>
+</section>
+
+<!-- ===== 6. LAS 2 CAPAS ===== -->
+<section class="slide">
+    <div class="tag">Estrategia</div>
+    <h2 class="headline">2 capas. 1 <span class="grad">motor</span>.</h2>
+    <div class="grid-2" style="margin-top: 40px; align-items: start;">
+        <div>
+            <div class="card" style="border-color: rgba(34,197,94,0.3); margin-bottom: 16px;">
+                <span class="badge badge-green">Capa 1 — Hoy</span>
+                <h3>Genera cash flow</h3>
+                <p style="margin-bottom: 16px;">Vendemos servicios usando proveedores externos. El margen financia la Capa 2.</p>
+                <div style="font-size: 13px; color: var(--gray-light); line-height: 2;">
+                    <strong style="color: var(--white);">BigVoz</strong> → vende agentes IA → paga a proveedores externos por minuto<br>
+                    <strong style="color: var(--white);">UpMVP</strong> → vende software → cash directo<br>
+                    <strong style="color: var(--white);">Parlando.me</strong> → app idiomas → paga proveedores de voz
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card" style="border-color: rgba(99,102,241,0.3); margin-bottom: 16px;">
+                <span class="badge badge-purple">Capa 2 — Destino</span>
+                <h3>Somos nuestro propio proveedor</h3>
+                <p style="margin-bottom: 16px;">InfinitoVox reemplaza a todos los proveedores externos. El costo baja, el margen sube, y vendemos minutos a terceros.</p>
+                <div style="font-size: 13px; color: var(--gray-light); line-height: 2;">
+                    <strong style="color: var(--white);">BigVoz</strong> → usa InfinitoVox → margen máximo, cero dependencia<br>
+                    <strong style="color: var(--white);">Parlando.me</strong> → usa InfinitoVox → costo casi cero<br>
+                    <strong style="color: var(--white);">InfinitoVox</strong> → vende minutos a terceros + intérpretes IA
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 7. EMPRESAS DEL HOLDING ===== -->
+<section class="slide">
+    <div class="tag">Empresas</div>
+    <h2 class="headline">El ecosistema <span class="grad">completo</span></h2>
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="card">
+            <span class="badge badge-green">Operando</span>
+            <h3>BigVoz.ai</h3>
+            <p>Agentes de voz e IA + gestión de ads. Clientes en Colombia, USA, Australia. Paquetes modulares para negocios de cualquier tamaño.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-green">Operando</span>
+            <h3>UpMVP</h3>
+            <p>Software a medida con IA. MVPs en 2-4 semanas. Proyectos activos en múltiples industrias.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-amber">Construyendo</span>
+            <h3>HoldingChat</h3>
+            <p>Plataforma de equipos de agentes IA. 17 agentes, kanban, archivos, aprobaciones. El método que construyó el holding.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-blue">Pre-lanzamiento</span>
+            <h3>Parlando.me</h3>
+            <p>App de práctica de idiomas con IA conversaciónal. Tutores de voz adaptativos. Primer cliente interno de InfinitoVox.</p>
+        </div>
+        <div class="card" style="grid-column: span 2; border-color: rgba(99,102,241,0.3);">
+            <span class="badge badge-purple">El destino</span>
+            <h3>InfinitoVox</h3>
+            <p>Servidor GPU propio. Modelos TTS/STS/NLP. Proveedor de IA de voz para LATAM. Cobro por minuto a terceros. Intérpretes IA para eventos. El ElevenLabs latino.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 8. LA EVIDENCIA ===== -->
+<section class="slide">
+    <div class="tag">La evidencia</div>
+    <h2 class="headline">Ya usamos proveedores de IA de voz.<br><span class="grad">Sabemos cómo funciona el negocio.</span></h2>
+    <p class="subtext">Operamos productos reales que consumen IA de voz todos los días. Conocemos los costos, las limitaciones y las oportunidades de cada proveedor porque somos sus clientes.</p>
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="card">
+            <span class="badge badge-green">BigVoz.ai</span>
+            <h3>Agentes de voz activos</h3>
+            <p>Clientes en Colombia, USA y Australia usando agentes de voz por teléfono y WhatsApp 24/7. Cada minuto de conversación pasa por ElevenLabs y Twilio. Vemos el consumo real.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-blue">Parlando.me</span>
+            <h3>IA conversacional para idiomas</h3>
+            <p>Tutores de voz que practican con estudiantes en tiempo real. Cada sesión consume minutos de TTS y NLP. El costo por usuario depende 100% del proveedor externo.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-amber">HoldingChat</span>
+            <h3>17 agentes IA operando</h3>
+            <p>Un equipo completo de agentes autónomos que construyó este holding. La plataforma que demuestra que los equipos IA funcionan en producción real.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-purple">UpMVP</span>
+            <h3>Software a medida con IA</h3>
+            <p>Construimos productos para terceros integrando IA. Cada proyecto nos da más contexto sobre lo que las empresas necesitan y cuánto están dispuestas a pagar.</p>
+        </div>
+    </div>
+    <p style="margin-top: 24px; font-size: 14px; color: var(--accent-light);">No estamos teorizando. Somos consumidores reales de estos servicios. Y sabemos exactamente dónde está la oportunidad.</p>
+</section>
+
+<!-- ===== 9. MERCADO INTERPRETES CORPORATIVOS ===== -->
+<section class="slide">
+    <div class="tag">La gran oportunidad</div>
+    <h2 class="headline">Adueñarnos del mercado de <span class="green">intérpretes para eventos corporativos</span></h2>
+    <p class="subtext">Cada conferencia, congreso, evento corporativo y reunión internacional necesita intérpretes. Hoy se pagan humanos. Mañana se usa IA — y queremos ser ese proveedor.</p>
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="card" style="border-color: rgba(239,68,68,0.2);">
+            <span class="badge badge-red">Intérprete humano</span>
+            <h3>Costoso y limitado</h3>
+            <div style="font-size: 14px; color: var(--gray-light); line-height: 2; margin-top: 12px;">
+                Disponibilidad limitada por idioma y ubicación<br>
+                Se cansa, necesita descansos y relevos<br>
+                Un intérprete por par de idiomas<br>
+                Requiere contratación anticipada<br>
+                Errores humanos en terminología técnica
+            </div>
+        </div>
+        <div class="card" style="border-color: rgba(34,197,94,0.3);">
+            <span class="badge badge-green">Intérprete InfinitoVox</span>
+            <h3>Escalable e instantáneo</h3>
+            <div style="font-size: 14px; color: var(--gray-light); line-height: 2; margin-top: 12px;">
+                Disponible en cualquier idioma, en cualquier momento<br>
+                No se cansa, opera 24/7 sin descanso<br>
+                Múltiples idiomas simultáneos<br>
+                Activación inmediata, sin logística<br>
+                Consistencia técnica y terminología exacta
+            </div>
+        </div>
+    </div>
+    <p style="margin-top: 32px; font-size: 15px; color: var(--white);">El mercado global de interpretación vale más de $10B USD. Las empresas de eventos son el canal perfecto — ya tienen los clientes, la infraestructura y la necesidad. Solo les falta la tecnología.</p>
+</section>
+
+<!-- ===== 10. ROADMAP ===== -->
+<section class="slide">
+    <div class="tag">Roadmap</div>
+    <h2 class="headline">El plan de <span class="amber">crecimiento</span></h2>
+    <div class="grid-3" style="margin-top: 40px;">
+        <div class="card">
+            <span class="badge badge-green">Fase 1 — Ahora</span>
+            <h3>Tracción con productos</h3>
+            <p>Crecer la base de clientes de BigVoz y UpMVP. Crear contenido semanal. Perfeccionar productos. Generar flujo de caja estable con proveedores externos.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-blue">Fase 2 — Infraestructura</span>
+            <h3>Servidor GPU + modelos</h3>
+            <p>Montar servidor GPU propio. Entrenar primeros modelos TTS en español. Contratar equipo humano. Empezar a reemplazar proveedores externos.</p>
+        </div>
+        <div class="card">
+            <span class="badge badge-amber">Fase 3 — Mercado</span>
+            <h3>Proveedor de IA de voz</h3>
+            <p>InfinitoVox en producción. API para terceros. Intérpretes IA para eventos corporativos. Ser el proveedor de referencia en LATAM.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 11. QUE BUSCAMOS ===== -->
+<section class="slide" style="align-items: center; text-align: center;">
+    <div class="tag">La propuesta</div>
+    <h2 class="headline" style="max-width: 800px;">Qué buscamos de un <span class="grad">aliado estratégico</span></h2>
+    <div class="grid-3" style="margin-top: 40px; max-width: 900px; text-align: left;">
+        <div class="card">
+            <div style="font-size: 28px; margin-bottom: 12px;">&#128176;</div>
+            <h3>Capital</h3>
+            <p>Inversión para servidor GPU ($15K-30K USD), equipo humano, y aceleración de ventas. Retorno directo en MRR mensual.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 28px; margin-bottom: 12px;">&#129309;</div>
+            <h3>Red de contactos</h3>
+            <p>Empresarios que necesitan automatizar. Empresas de eventos que usan intérpretes. Cada contacto = cliente potencial.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 28px; margin-bottom: 12px;">&#127959;</div>
+            <h3>Infraestructura</h3>
+            <p>Hardware, espacio, o infraestructura existente que acelere el deployment del servidor GPU y los modelos de IA.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 12. CTA ===== -->
+<section class="slide" style="align-items: center; text-align: center;">
+    <div class="tag">Siguiente paso</div>
+    <h2 class="headline">30 minutos. Demo en vivo.<br><span class="grad">Sin slides. Producto real.</span></h2>
+    <p class="subtext" style="text-align: center; margin: 0 auto;">
+        Te muestro BigVoz funcionando, HoldingChat con los 17 agentes operando, y el plan completo de InfinitoVox. Todo en vivo.
+    </p>
+    <a href="https://wa.me/573124860738?text=Hola%20Camilo%2C%20vi%20la%20presentacion%20del%20holding%20UniversoMarin%20y%20me%20gustaria%20agendar%20una%20reunión." class="cta-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar reunión por WhatsApp
+    </a>
+    <p style="margin-top: 32px; font-size: 14px; color: var(--gray);">
+        Camilo Marín — CEO & Founder<br>
+        <span style="color: var(--accent-light);">camilo@universomarin.com</span><br>
+        <span style="color: var(--gray-light);">Bogota, Colombia</span>
+    </p>
+</section>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    const vh = window.innerHeight;
+    if (e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); window.scrollBy({ top: vh, behavior: 'smooth' }); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); window.scrollBy({ top: -vh, behavior: 'smooth' }); }
+});
+</script>
+
+</body>
+</html>
