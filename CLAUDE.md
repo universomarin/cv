@@ -120,3 +120,26 @@ El dominio está en Squarespace. Para apuntar a GitHub Pages:
    - A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 2. En el repo, crear archivo `CNAME` con: `universomarin.com`
 3. En GitHub Settings → Pages → Custom domain: `universomarin.com`
+## HoldingChat — Board (Kanban)
+Puedes crear y gestionar tareas en el board de HoldingChat usando la API REST en `http://localhost:3777`.
+
+### Crear tarea
+```bash
+curl -s -X POST http://localhost:3777/api/channels/dev/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Nombre","description":"Detalle","assigned_to":"cv-agent","priority":"normal","status":"backlog","created_by":"cv-agent"}'
+```
+
+### Ver tareas
+```bash
+curl -s http://localhost:3777/api/channels/dev/tasks
+```
+
+### Actualizar tarea
+```bash
+curl -s -X PATCH http://localhost:3777/api/tasks/ID \
+  -H "Content-Type: application/json" \
+  -d '{"status":"in_progress"}'
+```
+
+### Status: `backlog`, `in_progress`, `review`, `done` | Prioridades: `normal`, `high`

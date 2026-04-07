@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversoMarin — Para Amigos e Inversionistas Tempranos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050507;
+            --dark: #0a0a0f;
+            --dark2: #12121a;
+            --dark3: #1a1a25;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --blue: #3b82f6;
+            --blue-dim: rgba(59,130,246,0.12);
+            --amber: #f59e0b;
+            --amber-dim: rgba(245,158,11,0.12);
+            --red: #ef4444;
+            --red-dim: rgba(239,68,68,0.12);
+            --pink: #ec4899;
+            --white: #f5f5f7;
+            --gray: #6b7280;
+            --gray-light: #9ca3af;
+            --border: rgba(255,255,255,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        .slide {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 80px 64px;
+            position: relative;
+        }
+        @media (max-width: 768px) { .slide { padding: 60px 24px; min-height: auto; padding-top: 100px; padding-bottom: 60px; } }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(5,5,7,0.85); backdrop-filter: blur(24px);
+            padding: 16px 64px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        nav .brand { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; }
+        nav .brand span { color: var(--accent-light); }
+        nav .nav-r { font-size: 11px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+        @media (max-width: 768px) { nav { padding: 14px 24px; } nav .nav-r { display: none; } }
+
+        .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; color: var(--accent-light); margin-bottom: 16px; }
+        .tag.green { color: var(--green); }
+        .tag.amber { color: var(--amber); }
+        .tag.pink { color: var(--pink); }
+
+        .headline {
+            font-family: 'Space Grotesk'; font-weight: 700;
+            font-size: clamp(32px, 5vw, 60px);
+            line-height: 1.05; letter-spacing: -2px; margin-bottom: 24px;
+        }
+        .headline .grad { background: linear-gradient(135deg, var(--accent-light), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .headline .green { color: var(--green); }
+        .headline .amber { color: var(--amber); }
+        .headline .pink { color: var(--pink); }
+        .subtext { font-size: 18px; color: var(--gray-light); line-height: 1.7; max-width: 700px; }
+        .subtext.lg { font-size: 20px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 16px; padding: 28px; transition: all 0.3s;
+        }
+        .card:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-2px); }
+        .card h3 { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .card p { font-size: 14px; color: var(--gray-light); line-height: 1.6; }
+        .card .meta { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .card .number { font-family: 'Space Grotesk'; font-size: 32px; font-weight: 700; margin-top: 12px; }
+
+        .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
+        .badge-green { background: var(--green-dim); color: var(--green); }
+        .badge-amber { background: var(--amber-dim); color: var(--amber); }
+        .badge-blue { background: var(--blue-dim); color: var(--blue); }
+        .badge-purple { background: var(--accent-glow); color: var(--accent-light); }
+        .badge-red { background: var(--red-dim); color: var(--red); }
+        .badge-pink { background: rgba(236,72,153,0.12); color: var(--pink); }
+
+        .big-number { font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(48px, 8vw, 96px); line-height: 1; }
+        .big-number.grad { background: linear-gradient(135deg, var(--accent-light), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+        .compare { width: 100%; border-collapse: collapse; margin-top: 32px; }
+        .compare th, .compare td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .compare th { color: var(--gray); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .compare .us { color: var(--green); font-weight: 700; }
+        .compare .them { color: var(--gray-light); }
+
+        .divider { width: 48px; height: 2px; background: var(--accent); margin: 24px 0; }
+
+        /* Comparativa hero */
+        .vs-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 40px; }
+        @media (max-width: 768px) { .vs-grid { grid-template-columns: 1fr; } }
+        .vs-card {
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 16px; padding: 32px;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .vs-card.featured { border-color: var(--accent); background: linear-gradient(180deg, var(--dark2), rgba(99,102,241,0.05)); }
+        .vs-card .vs-flag { font-size: 28px; }
+        .vs-card .vs-name { font-family: 'Space Grotesk'; font-size: 22px; font-weight: 700; }
+        .vs-card .vs-tag { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        .vs-card .vs-stat { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--border); font-size: 13px; }
+        .vs-card .vs-stat .label { color: var(--gray); }
+        .vs-card .vs-stat .val { font-weight: 700; color: var(--white); }
+        .vs-card.featured .vs-stat .val { color: var(--accent-light); }
+
+        /* Timeline / proyección */
+        .timeline {
+            margin-top: 40px; display: flex; flex-direction: column; gap: 16px;
+        }
+        .timeline-row {
+            display: grid; grid-template-columns: 100px 1fr 180px;
+            gap: 20px; align-items: center;
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 12px; padding: 20px 24px;
+        }
+        @media (max-width: 768px) { .timeline-row { grid-template-columns: 1fr; gap: 8px; } }
+        .timeline-row .when { font-family: 'Space Grotesk'; font-size: 13px; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; }
+        .timeline-row .what { font-size: 14px; color: var(--gray-light); line-height: 1.5; }
+        .timeline-row .what strong { color: var(--white); }
+        .timeline-row .val { font-family: 'Space Grotesk'; font-size: 22px; font-weight: 700; color: var(--green); text-align: right; }
+        @media (max-width: 768px) { .timeline-row .val { text-align: left; font-size: 18px; } }
+
+        /* Productos grid */
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr; } }
+        .product-card {
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 16px; padding: 24px;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .product-card.live { border-color: rgba(34,197,94,0.3); }
+        .product-card.dev { border-color: rgba(245,158,11,0.2); }
+        .product-card .pc-head { display: flex; justify-content: space-between; align-items: flex-start; }
+        .product-card .pc-name { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; }
+        .product-card .pc-desc { font-size: 13px; color: var(--gray-light); line-height: 1.5; }
+        .product-card .pc-mrr { font-size: 14px; color: var(--green); font-weight: 700; margin-top: 8px; }
+
+        /* Return matrix */
+        .return-table { width: 100%; border-collapse: collapse; margin-top: 32px; background: var(--dark2); border-radius: 12px; overflow: hidden; }
+        .return-table th, .return-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        .return-table th { background: var(--dark3); font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .return-table td { font-size: 14px; }
+        .return-table .multiplier { font-family: 'Space Grotesk'; font-weight: 700; font-size: 18px; color: var(--green); }
+        .return-table .value { font-family: 'Space Grotesk'; font-weight: 700; font-size: 16px; color: var(--white); }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+        @media (max-width: 768px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            background: var(--dark2); border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px;
+        }
+        .stat .stat-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .stat .stat-value { font-family: 'Space Grotesk'; font-size: 32px; font-weight: 700; color: var(--white); line-height: 1; }
+        .stat .stat-sub { font-size: 12px; color: var(--gray-light); margin-top: 6px; }
+
+        .quote {
+            background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(59,130,246,0.04));
+            border-left: 4px solid var(--accent); padding: 32px 40px;
+            border-radius: 12px; margin-top: 32px;
+            font-size: 18px; line-height: 1.7; color: var(--white);
+            font-style: italic; max-width: 800px;
+        }
+        .quote-attr { display: block; margin-top: 16px; font-size: 13px; color: var(--gray); font-style: normal; font-weight: 600; }
+
+        .risk-card {
+            background: var(--dark2); border: 1px solid rgba(245,158,11,0.2);
+            border-radius: 12px; padding: 24px;
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .risk-card .risk-icon { font-size: 24px; flex-shrink: 0; }
+        .risk-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--amber); }
+        .risk-card p { font-size: 13px; color: var(--gray-light); line-height: 1.5; }
+
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--accent); color: white;
+            padding: 18px 40px; border-radius: 12px;
+            font-size: 16px; font-weight: 700; transition: all 0.2s; margin-top: 32px;
+        }
+        .cta-btn:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(99,102,241,0.3); }
+        .cta-btn-outline {
+            background: transparent; border: 1px solid var(--accent);
+            color: var(--accent-light);
+        }
+
+        .glow {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
+
+        .live-dot {
+            display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--green); margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+            50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="brand">Universo<span>Marin</span></div>
+    <div class="nav-r">Para amigos · Confidencial 2026</div>
+</nav>
+
+<!-- ===== 1. COVER ===== -->
+<section class="slide" style="text-align: center; align-items: center;">
+    <div class="glow"></div>
+    <div class="tag">Una conversación con amigos</div>
+    <h1 class="headline" style="max-width: 1000px;">
+        ElevenLabs vale <span class="grad">$11.000 millones</span>.<br>
+        UniversoMarin puede ser <span class="green">el siguiente</span>.
+    </h1>
+    <p class="subtext lg" style="text-align: center; margin: 24px auto 0;">
+        Esta presentación es para gente cercana que quiere entender qué estoy construyendo y cómo pueden ser parte temprana.<br><br>
+        Sin tecnicismos. Solo números reales y la oportunidad real.
+    </p>
+    <div class="divider" style="margin: 40px auto;"></div>
+    <p style="font-size: 14px; color: var(--gray);">Camilo Marín · CEO & Founder · Abril 2026</p>
+</section>
+
+<!-- ===== 2. EL CONTEXTO ===== -->
+<section class="slide">
+    <div class="tag">Lo que está pasando en el mundo</div>
+    <h2 class="headline">La inteligencia artificial de voz es el<br><span class="grad">próximo gran mercado</span></h2>
+    <p class="subtext">Hace 3 años nadie sabía qué era un agente IA que habla. Hoy hay empresas que valen miles de millones haciendo exactamente eso. Te muestro dos ejemplos:</p>
+
+    <div class="vs-grid">
+        <div class="vs-card">
+            <div class="vs-flag">🇺🇸</div>
+            <div>
+                <div class="vs-name">ElevenLabs</div>
+                <div class="vs-tag">USA · Fundada 2022</div>
+            </div>
+            <div class="vs-stat"><span class="label">Empleados</span><span class="val">580+</span></div>
+            <div class="vs-stat"><span class="label">Ingresos anuales</span><span class="val">$330M USD</span></div>
+            <div class="vs-stat"><span class="label">Funding levantado</span><span class="val">$680M USD</span></div>
+            <div class="vs-stat"><span class="label">Valuación actual</span><span class="val">$11.000M USD</span></div>
+            <p style="font-size: 12px; color: var(--gray-light); margin-top: 8px;">Triplicó su valuación en 1 año. Inversores: a16z, Sequoia, Nvidia.</p>
+        </div>
+
+        <div class="vs-card">
+            <div class="vs-flag">🇨🇴</div>
+            <div>
+                <div class="vs-name">Dapta</div>
+                <div class="vs-tag">Colombia · Fundada 2023</div>
+            </div>
+            <div class="vs-stat"><span class="label">Empleados</span><span class="val">38</span></div>
+            <div class="vs-stat"><span class="label">Productos</span><span class="val">4</span></div>
+            <div class="vs-stat"><span class="label">Funding levantado</span><span class="val">$5.3M USD</span></div>
+            <div class="vs-stat"><span class="label">Valuación estimada</span><span class="val">~$15M USD</span></div>
+            <p style="font-size: 12px; color: var(--gray-light); margin-top: 8px;">Levantaron en pre-seed. Sin facturación pública grande aún.</p>
+        </div>
+
+        <div class="vs-card featured">
+            <div class="vs-flag">🚀</div>
+            <div>
+                <div class="vs-name">UniversoMarin</div>
+                <div class="vs-tag">Colombia · Fundada 2026</div>
+            </div>
+            <div class="vs-stat"><span class="label">Empleados humanos</span><span class="val">1 (yo)</span></div>
+            <div class="vs-stat"><span class="label">Empleados IA</span><span class="val">17 agentes</span></div>
+            <div class="vs-stat"><span class="label">Productos</span><span class="val">10</span></div>
+            <div class="vs-stat"><span class="label">MRR actual</span><span class="val">$7.200 USD</span></div>
+            <div class="vs-stat"><span class="label">Valuación pre-money</span><span class="val">$1M USD</span></div>
+        </div>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 14px; color: var(--gray); max-width: 800px;">
+        Fuentes públicas: <a href="https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/" style="color: var(--accent-light);">TechCrunch</a>, <a href="https://www.cbinsights.com/company/dapta" style="color: var(--accent-light);">CBInsights</a>, <a href="https://www.crunchbase.com/organization/dapta" style="color: var(--accent-light);">Crunchbase</a>.
+    </p>
+</section>
+
+<!-- ===== 3. EL PROBLEMA EN SIMPLE ===== -->
+<section class="slide">
+    <div class="tag amber">El problema que resolvemos</div>
+    <h2 class="headline">Toda LATAM le paga a <span class="amber">Estados Unidos</span><br>para usar IA de voz.</h2>
+    <p class="subtext">
+        Hoy si una empresa colombiana quiere un agente IA que conteste por WhatsApp, llame por teléfono o traduzca un evento, tiene que pagarle en dólares a empresas de USA o Europa. <strong style="color: var(--white);">No existe una alternativa local.</strong>
+    </p>
+
+    <div class="grid-3" style="margin-top: 40px;">
+        <div class="card">
+            <div class="badge badge-amber">Hoy</div>
+            <h3>Paga a USA en dólares</h3>
+            <p>Cada minuto de voz IA se paga en dólares a ElevenLabs, OpenAI, Google. Un evento corporativo de 3 días puede costar miles de dólares solo en infraestructura.</p>
+        </div>
+        <div class="card">
+            <div class="badge badge-amber">Hoy</div>
+            <h3>Español "robótico"</h3>
+            <p>Las voces son robóticas y los modelos no entienden bien acentos colombianos, mexicanos o argentinos. La experiencia es tercermundista.</p>
+        </div>
+        <div class="card">
+            <div class="badge badge-amber">Hoy</div>
+            <h3>Sin soporte local</h3>
+            <p>Si algo falla, el soporte está en inglés y en otra zona horaria. Las empresas LATAM están solas con tecnología hecha para gringos.</p>
+        </div>
+    </div>
+
+    <div class="quote">
+        "La oportunidad no es competirle a ElevenLabs en USA. La oportunidad es ser el ElevenLabs de LATAM, donde nadie tiene una solución hecha aquí, para nuestros acentos, nuestros precios y nuestro idioma."
+        <span class="quote-attr">— Camilo Marín</span>
+    </div>
+</section>
+
+<!-- ===== 4. QUE TENGO HOY ===== -->
+<section class="slide">
+    <div class="tag green">Lo que tengo HOY (no promesas)</div>
+    <h2 class="headline">No es una idea. <span class="green">Ya está funcionando.</span></h2>
+    <p class="subtext">Esto no es una presentación de "lo que voy a construir". Es lo que ya está vendiendo, lo que ya está en producción y los clientes que ya pagan.</p>
+
+    <div class="stat-grid">
+        <div class="stat">
+            <div class="stat-label">MRR Actual</div>
+            <div class="stat-value">$7.200</div>
+            <div class="stat-sub">USD/mes recurrente</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Clientes activos</div>
+            <div class="stat-value">18</div>
+            <div class="stat-sub">pagando todos los meses</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">ARR (anualizado)</div>
+            <div class="stat-value">$86K</div>
+            <div class="stat-sub">USD al año</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Margen bruto</div>
+            <div class="stat-value">85%</div>
+            <div class="stat-sub">comparable a SaaS USA</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+        <h3 style="font-family: 'Space Grotesk'; font-size: 22px; font-weight: 700; margin-bottom: 16px;">Productos ya lanzados <span class="badge badge-green" style="vertical-align: middle;">EN VIVO</span></h3>
+        <div class="grid-2">
+            <div class="card live" style="border-color: rgba(34,197,94,0.3);">
+                <span class="badge badge-green"><span class="live-dot"></span>VENDIENDO</span>
+                <h3>BigVoz.ai</h3>
+                <p style="margin-bottom: 12px;">Agentes de voz IA por WhatsApp + gestión administrativa de pauta publicitaria. Empresas en Colombia, USA y Australia están pagando hoy.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--gray-light);">
+                    <span><strong style="color: var(--white);">18</strong> clientes</span>
+                    <span><strong style="color: var(--green);">$7.200</strong> USD/mes MRR</span>
+                </div>
+            </div>
+            <div class="card live" style="border-color: rgba(34,197,94,0.3);">
+                <span class="badge badge-green"><span class="live-dot"></span>EN CHROME WEB STORE</span>
+                <h3>Parlando.me</h3>
+                <p style="margin-bottom: 12px;">Traductor en tiempo real para Google Meet. Habla español, escucha inglés. 12 idiomas. Aprobado oficialmente por Chrome Web Store.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--gray-light);">
+                    <span><strong style="color: var(--white);">12</strong> idiomas</span>
+                    <span><strong style="color: var(--accent-light);">Pipeline B2B premium</strong> (ONGs, Tony Robbins)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 13px; color: var(--gray);">
+        Parlando.me en Chrome Web Store: <a href="https://chromewebstore.google.com/detail/parlandome/hckmdibgpmhegfnajbpopdgaoifnalfj" style="color: var(--accent-light);">verificable aquí</a>
+    </p>
+</section>
+
+<!-- ===== 5. EL HOLDING - 10 PRODUCTOS ===== -->
+<section class="slide">
+    <div class="tag">El holding completo</div>
+    <h2 class="headline">No es una empresa.<br>Es <span class="grad">10 productos</span> que se alimentan entre sí.</h2>
+    <p class="subtext">UniversoMarin no es un solo producto con 1 apuesta. Son 10 productos. Algunos generan dinero hoy. Otros entrenan el modelo. Otros son la infraestructura del futuro. Todos comparten clientes, datos y agentes IA.</p>
+
+    <div class="product-grid">
+        <div class="product-card live">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-green"><span class="live-dot"></span>VENDIENDO</span>
+                    <div class="pc-name">1. BigVoz Agencia</div>
+                </div>
+                <div style="font-size: 18px;">📢</div>
+            </div>
+            <div class="pc-desc">Servicio de gestión de pauta publicitaria + agentes IA para empresas. Latin Street (Australia), Auto Insurance Now (NYC), Tingo (Colombia).</div>
+            <div class="pc-mrr">$2.635 USD/mes · 5 clientes premium</div>
+        </div>
+
+        <div class="product-card live">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-green"><span class="live-dot"></span>VENDIENDO</span>
+                    <div class="pc-name">2. BigVoz.ai</div>
+                </div>
+                <div style="font-size: 18px;">🤖</div>
+            </div>
+            <div class="pc-desc">Plataforma de agentes IA por WhatsApp self-serve. $150 USD/mes + gestión de anuncios. 18 clientes activos.</div>
+            <div class="pc-mrr">$7.200 USD/mes total con gestión</div>
+        </div>
+
+        <div class="product-card live">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-green"><span class="live-dot"></span>EN CHROME STORE</span>
+                    <div class="pc-name">3. Parlando.me</div>
+                </div>
+                <div style="font-size: 18px;">🌍</div>
+            </div>
+            <div class="pc-desc">Traductor en tiempo real para Google Meet. 12 idiomas. Pipeline B2B con ONGs, eventos corporativos y alumnos de Tony Robbins.</div>
+            <div class="pc-mrr">Pipeline activo · cotizaciones en curso</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-amber">PILOTO</span>
+                    <div class="pc-name">4. BigVoz Verticals</div>
+                </div>
+                <div style="font-size: 18px;">🍔</div>
+            </div>
+            <div class="pc-desc">Agentes IA especializados por industria. Restaurantes (Bife Burger), legal (Auram), salud, inmobiliario. $500 setup + $250/mes por negocio.</div>
+            <div class="pc-mrr">Bife Burger 5 sedes en cierre</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-purple">CONSULTORÍA</span>
+                    <div class="pc-name">5. UpMVP</div>
+                </div>
+                <div style="font-size: 18px;">⚙️</div>
+            </div>
+            <div class="pc-desc">Construyo MVPs reales para terceros en 2-4 semanas. Casos: Auram (sistema legal), Rumbo (carpooling corporativo). Flujo de caja inmediato.</div>
+            <div class="pc-mrr">$5K-15K USD por proyecto</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-blue">PRODUCCIÓN</span>
+                    <div class="pc-name">6. Auram (Legalis)</div>
+                </div>
+                <div style="font-size: 18px;">⚖️</div>
+            </div>
+            <div class="pc-desc">Sistema automatizado de gestión de procesos judiciales para abogados en Colombia. Construido por UpMVP, ya deployado en Railway + Vercel.</div>
+            <div class="pc-mrr">Cliente B2B legal · pre-revenue</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-pink">DEMO</span>
+                    <div class="pc-name">7. Rumbo Carpooling</div>
+                </div>
+                <div style="font-size: 18px;">🚗</div>
+            </div>
+            <div class="pc-desc">Plataforma de carpooling corporativo. Construido con Mónica Jaimes. Backend NestJS + Frontend Expo Web/iOS/Android. Demo lista.</div>
+            <div class="pc-mrr">Sociedad con % operación</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-purple">USO INTERNO</span>
+                    <div class="pc-name">8. HoldingChat</div>
+                </div>
+                <div style="font-size: 18px;">💬</div>
+            </div>
+            <div class="pc-desc">Plataforma para gestionar equipos de agentes IA. Es como tener un Slack donde tus empleados son robots. Lo uso para operar el holding.</div>
+            <div class="pc-mrr">Producto SaaS pendiente lanzar</div>
+        </div>
+
+        <div class="product-card dev">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-amber">MVP</span>
+                    <div class="pc-name">9. Virtual Try-On</div>
+                </div>
+                <div style="font-size: 18px;">👕</div>
+            </div>
+            <div class="pc-desc">Probador virtual de ropa con IA para tiendas online. MVP funcional, primer cliente cobrado.</div>
+            <div class="pc-mrr">$1K USD cobrado · escalable</div>
+        </div>
+
+        <div class="product-card" style="border-color: var(--accent); background: linear-gradient(180deg, var(--dark2), rgba(99,102,241,0.05));">
+            <div class="pc-head">
+                <div>
+                    <span class="badge badge-purple">CORAZÓN DEL HOLDING</span>
+                    <div class="pc-name" style="color: var(--accent-light);">10. InfinitoVox</div>
+                </div>
+                <div style="font-size: 18px;">⚡</div>
+            </div>
+            <div class="pc-desc">Infraestructura de voz IA propia para LATAM. Servidor GPU con modelos TTS, STS, NLP. Todo lo que hoy paga BigVoz a ElevenLabs, en 12 meses lo paga a sí mismo.</div>
+            <div class="pc-mrr" style="color: var(--accent-light);">El producto que vale $1B en 4 años</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 6. POR QUE 17 AGENTES IA ===== -->
+<section class="slide">
+    <div class="tag pink">El secreto operativo</div>
+    <h2 class="headline">17 empleados IA<br>cuestan menos que <span class="pink">un café al día</span>.</h2>
+    <p class="subtext">
+        Esto es lo que cambia todo. Yo no contraté 17 personas. Yo construí un equipo de 17 agentes IA usando Claude Code. Cada uno tiene un rol, una memoria, herramientas, y trabaja 24/7.
+    </p>
+
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="card">
+            <div class="badge badge-amber">EMPRESA TRADICIONAL</div>
+            <h3>17 empleados humanos</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">💰 Costo: $50.000-100.000 USD/mes en salarios</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">⏰ Horario: 8 horas al día</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">🏢 Necesita oficina, sillas, café</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">🤝 Reuniones, política, vacaciones</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light);">🐌 Velocidad de iteración: semanas/meses</li>
+            </ul>
+        </div>
+        <div class="card" style="border-color: var(--accent);">
+            <div class="badge badge-purple">UNIVERSOMARIN</div>
+            <h3>17 empleados IA + 1 humano (yo)</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 16px;">
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">💰 Costo: ~$50-150 USD/mes total</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">⏰ Horario: 24/7 sin pausa</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">🏢 Cero infraestructura física</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light); border-bottom: 1px solid var(--border);">📊 Memoria perfecta, contexto completo</li>
+                <li style="padding: 8px 0; font-size: 14px; color: var(--gray-light);">⚡ Velocidad de iteración: minutos/horas</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="quote">
+        "Dapta tiene 38 empleados humanos. ElevenLabs tiene 580. Yo tengo 1. Pero opero como una empresa de 20 personas porque mis 17 agentes IA construyen, venden, escriben código y atienden clientes mientras duermo."
+        <span class="quote-attr">— Camilo</span>
+    </div>
+</section>
+
+<!-- ===== 7. PROYECCION DE CRECIMIENTO ===== -->
+<section class="slide">
+    <div class="tag">Proyección honesta</div>
+    <h2 class="headline">Cómo crece UniversoMarin<br>en los <span class="grad">próximos 4 años</span></h2>
+    <p class="subtext">No te voy a vender promesas vacías. Te muestro las etapas con números concretos y los hitos que tienen que pasar para llegar a cada una.</p>
+
+    <div class="timeline">
+        <div class="timeline-row">
+            <div class="when">HOY · Abril 2026</div>
+            <div class="what"><strong>$7.200 MRR · 18 clientes · 2 productos lanzados</strong><br>BigVoz.ai vendiendo + Parlando.me en Chrome Store. Friends round abierto.</div>
+            <div class="val">$1M</div>
+        </div>
+        <div class="timeline-row">
+            <div class="when">+ 6 meses</div>
+            <div class="what"><strong>$15K MRR · 70+ clientes · 6 productos vendiendo</strong><br>Bife Burger cerrado (5 sedes). Vertical restaurantes activo. Parlando.me con primeras empresas pagando.</div>
+            <div class="val">$3M</div>
+        </div>
+        <div class="timeline-row">
+            <div class="when">+ 12 meses</div>
+            <div class="what"><strong>$45K MRR · 600+ clientes · 9 productos</strong><br>Verticales legal + médico activos. UpMVP con flujo constante. Auram con clientes pagando.</div>
+            <div class="val">$12M</div>
+        </div>
+        <div class="timeline-row">
+            <div class="when">+ 18 meses</div>
+            <div class="what"><strong>$120K MRR · 3.000+ clientes · InfinitoVox lanzado como SaaS</strong><br>Es el momento clave. InfinitoVox sale al mercado como API por minuto. Margen sube de 85% a 95%.</div>
+            <div class="val">$40M</div>
+        </div>
+        <div class="timeline-row">
+            <div class="when">+ 24 meses</div>
+            <div class="what"><strong>$480K MRR · Expansión LATAM</strong><br>México, Argentina, Chile. Parlando.me con 10K usuarios pagos. InfinitoVox compite directamente con ElevenLabs en LATAM.</div>
+            <div class="val">$150M</div>
+        </div>
+        <div class="timeline-row" style="border: 1px solid var(--accent); background: linear-gradient(90deg, rgba(99,102,241,0.05), transparent);">
+            <div class="when" style="color: var(--green);">+ 36-48 meses</div>
+            <div class="what"><strong style="color: var(--green);">$1.5M+ MRR · Líder LATAM voice AI</strong><br>Si llegamos aquí, somos un unicornio LATAM. Comparable directo de ElevenLabs en español.</div>
+            <div class="val" style="color: var(--accent-light);">$300M-1B</div>
+        </div>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 13px; color: var(--gray);">Las valuaciones se calculan usando múltiplos estándar de la industria SaaS B2B con IA: 15-30x ARR en early stage, 10-20x en growth stage. Comparables: Dapta, Notion, Hugging Face, ElevenLabs.</p>
+</section>
+
+<!-- ===== 8. LA OPORTUNIDAD PARA AMIGOS ===== -->
+<section class="slide">
+    <div class="tag green">La oportunidad para ti</div>
+    <h2 class="headline">$30.000 hoy podrían valer<br><span class="green">millones</span> en 4 años.</h2>
+    <p class="subtext">Esto es lo que estoy ofreciendo a amigos cercanos: entrar antes de que esto sea obvio para fondos de inversión profesionales.</p>
+
+    <div class="stat-grid" style="margin-top: 40px;">
+        <div class="stat" style="border-color: var(--accent);">
+            <div class="stat-label">Tu inversión</div>
+            <div class="stat-value" style="color: var(--accent-light);">$30.000</div>
+            <div class="stat-sub">USD (mínimo sugerido)</div>
+        </div>
+        <div class="stat" style="border-color: var(--accent);">
+            <div class="stat-label">Valuación pre-money</div>
+            <div class="stat-value" style="color: var(--accent-light);">$1M</div>
+            <div class="stat-sub">USD del holding completo</div>
+        </div>
+        <div class="stat" style="border-color: var(--accent);">
+            <div class="stat-label">Tu equity</div>
+            <div class="stat-value" style="color: var(--accent-light);">3%</div>
+            <div class="stat-sub">del holding UniversoMarin</div>
+        </div>
+        <div class="stat" style="border-color: var(--accent);">
+            <div class="stat-label">Estructura</div>
+            <div class="stat-value" style="color: var(--accent-light);">SAFE</div>
+            <div class="stat-sub">o nota convertible</div>
+        </div>
+    </div>
+
+    <h3 style="font-family: 'Space Grotesk'; font-size: 22px; font-weight: 700; margin-top: 48px; margin-bottom: 16px;">Tu retorno potencial según el escenario</h3>
+
+    <table class="return-table">
+        <thead>
+            <tr>
+                <th>Si UniversoMarin llega a...</th>
+                <th>Tu 3% vale</th>
+                <th>Tu múltiplo</th>
+                <th>Comparable real</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>$3M (en 6 meses)</td>
+                <td class="value">$90.000</td>
+                <td class="multiplier">3x</td>
+                <td>Bife Burger cerrado + 6 productos</td>
+            </tr>
+            <tr>
+                <td>$12M (en 12 meses)</td>
+                <td class="value">$360.000</td>
+                <td class="multiplier">12x</td>
+                <td>Casi como Dapta hoy</td>
+            </tr>
+            <tr>
+                <td>$40M (en 18 meses)</td>
+                <td class="value">$1.200.000</td>
+                <td class="multiplier">40x</td>
+                <td>InfinitoVox SaaS lanzado</td>
+            </tr>
+            <tr>
+                <td>$150M (en 24 meses)</td>
+                <td class="value">$4.500.000</td>
+                <td class="multiplier">150x</td>
+                <td>Líder regional</td>
+            </tr>
+            <tr style="background: linear-gradient(90deg, rgba(34,197,94,0.05), transparent);">
+                <td>$500M (en 36 meses)</td>
+                <td class="value" style="color: var(--green);">$15.000.000</td>
+                <td class="multiplier">500x</td>
+                <td>10% de ElevenLabs hoy</td>
+            </tr>
+            <tr style="background: linear-gradient(90deg, rgba(99,102,241,0.08), transparent);">
+                <td>$1.000M (en 48 meses · unicornio)</td>
+                <td class="value" style="color: var(--accent-light);">$30.000.000</td>
+                <td class="multiplier" style="color: var(--accent-light);">1000x</td>
+                <td>Lo mismo que ElevenLabs en 2024</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top: 24px; font-size: 13px; color: var(--gray);">Estos son escenarios, no garantías. La mayoría de startups no llegan a unicornio. Pero los amigos que entraron en ElevenLabs en 2022 a $50M de valuación, hoy tienen una posición que vale 220x.</p>
+</section>
+
+<!-- ===== 9. EN QUE SE GASTA TU PLATA ===== -->
+<section class="slide">
+    <div class="tag">Si entras: en qué se usa tu plata</div>
+    <h2 class="headline">Cada dólar tiene <span class="grad">destino</span>.</h2>
+    <p class="subtext">Si invertimos los primeros $30K-100K USD del friends round, esto es exactamente en qué se va. No es para pagarme un sueldo. Es infraestructura, talento y crecimiento.</p>
+
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="card">
+            <div class="badge badge-purple">40%</div>
+            <h3>Servidor GPU para InfinitoVox</h3>
+            <p>El servidor donde corre la infraestructura de voz IA propia. Esto reemplaza el costo variable de pagarle a ElevenLabs y desbloquea el margen del 95%.</p>
+            <div class="number" style="color: var(--accent-light);">$12K-15K</div>
+        </div>
+        <div class="card">
+            <div class="badge badge-blue">30%</div>
+            <h3>Primer humano: Closer / Account Manager</h3>
+            <p>El primer humano que contrato no es un dev. Es alguien que cierra ventas y atiende a los clientes para liberarme a mí a construir producto.</p>
+            <div class="number" style="color: var(--blue);">$8K-10K</div>
+        </div>
+        <div class="card">
+            <div class="badge badge-green">20%</div>
+            <h3>Marketing y adquisición</h3>
+            <p>Pauta digital, contenido, demos para vender más rápido los productos que ya están listos. ROAS comprobado en BigVoz.</p>
+            <div class="number" style="color: var(--green);">$6K</div>
+        </div>
+        <div class="card">
+            <div class="badge badge-amber">10%</div>
+            <h3>Buffer operativo</h3>
+            <p>Hosting, dominios, herramientas de desarrollo (Claude API, OpenAI, Railway, Vercel). Lo mínimo para seguir operando 6 meses sin tocar revenue.</p>
+            <div class="number" style="color: var(--amber);">$3K</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 10. RIESGOS HONESTOS ===== -->
+<section class="slide">
+    <div class="tag amber">Honestidad brutal</div>
+    <h2 class="headline">Lo que puede salir mal.<br><span class="amber">No te lo voy a esconder.</span></h2>
+    <p class="subtext">Toda inversión temprana tiene riesgo. Si alguien te dice lo contrario te está vendiendo humo. Esto es lo que honestamente puede fallar:</p>
+
+    <div class="grid-2" style="margin-top: 40px;">
+        <div class="risk-card">
+            <div class="risk-icon">⚠️</div>
+            <div>
+                <h4>Riesgo 1: InfinitoVox tarda más de 18 meses</h4>
+                <p>Si la infraestructura propia de voz no está lista en 18 meses, perdemos la ventana de mercado y seguimos pagándole a ElevenLabs. El margen no escala como proyectamos.</p>
+            </div>
+        </div>
+        <div class="risk-card">
+            <div class="risk-icon">⚠️</div>
+            <div>
+                <h4>Riesgo 2: ElevenLabs lanza español LATAM nativo</h4>
+                <p>Si ElevenLabs u OpenAI deciden meterse fuerte en español latinoamericano antes que nosotros, nos compiten directamente. Nuestra ventaja sería el precio y el soporte local.</p>
+            </div>
+        </div>
+        <div class="risk-card">
+            <div class="risk-icon">⚠️</div>
+            <div>
+                <h4>Riesgo 3: Bus factor de 1</h4>
+                <p>Soy un solo humano. Si me pasa algo grave, el holding queda sin operador hasta que se contrate al primer humano. Por eso 30% del friends round va a contratar al primer closer.</p>
+            </div>
+        </div>
+        <div class="risk-card">
+            <div class="risk-icon">⚠️</div>
+            <div>
+                <h4>Riesgo 4: Crecimiento más lento de lo proyectado</h4>
+                <p>Si BigVoz no llega a 18 nuevos clientes en 6 meses, el MRR no llega a $15K, lo que retrasa la valuación de Q3. No quiebra el holding pero las metas se mueven.</p>
+            </div>
+        </div>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 14px; color: var(--gray-light); max-width: 800px;">
+        <strong style="color: var(--white);">Lo que NO es un riesgo:</strong> el producto no funciona (ya está vendiendo), el mercado no existe (ElevenLabs vale $11B), nadie quiere comprar (ya tengo 18 clientes pagando todos los meses).
+    </p>
+</section>
+
+<!-- ===== 11. POR QUE INVERTIR EN MI ===== -->
+<section class="slide" style="text-align: center; align-items: center;">
+    <div class="glow"></div>
+    <div class="tag">Por qué deberías apostar por mí</div>
+    <h2 class="headline" style="max-width: 900px;">No estás invirtiendo en una idea.<br>Estás invirtiendo en <span class="grad">ejecución comprobada</span>.</h2>
+
+    <div class="grid-3" style="margin-top: 48px; max-width: 1000px;">
+        <div class="card">
+            <div style="font-size: 40px; margin-bottom: 12px;">🚀</div>
+            <h3>Ya construí 10 productos</h3>
+            <p>No estoy planeando construir. Ya construí. Algunos venden, algunos están en piloto, todos tienen código real funcionando.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 40px; margin-bottom: 12px;">💰</div>
+            <h3>Ya hay clientes pagando</h3>
+            <p>$7.200 USD/mes recurrente con 18 clientes. No es una estimación, es facturación real verificable.</p>
+        </div>
+        <div class="card">
+            <div style="font-size: 40px; margin-bottom: 12px;">🤖</div>
+            <h3>Tengo un método único</h3>
+            <p>17 agentes IA operando como una empresa. Esto no lo hace nadie más. Es mi ventaja competitiva.</p>
+        </div>
+    </div>
+
+    <div class="quote" style="margin: 48px auto 0;">
+        "No te estoy pidiendo que creas en una promesa. Te estoy mostrando lo que ya construí, lo que ya vende, y la curva de crecimiento de los próximos 4 años. Si te tiene sentido, hablemos. Si no, gracias por leer."
+        <span class="quote-attr">— Camilo</span>
+    </div>
+</section>
+
+<!-- ===== 12. NEXT STEP ===== -->
+<section class="slide" style="text-align: center; align-items: center;">
+    <div class="tag green">Si quieres ser parte</div>
+    <h2 class="headline" style="max-width: 900px;">
+        Hablemos un café.<br>
+        <span class="grad">30 minutos</span>, sin compromiso.
+    </h2>
+    <p class="subtext lg" style="text-align: center; margin: 24px auto;">
+        Te muestro los productos en vivo, los números reales, contesto cualquier pregunta y si te tiene sentido, definimos los términos.
+    </p>
+
+    <div style="display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center;">
+        <a href="https://wa.me/573124860738?text=Hola%20Camilo,%20vi%20la%20presentaci%C3%B3n%20de%20UniversoMarin%20y%20quiero%20hablar" class="cta-btn">
+            💬 Escribirme por WhatsApp
+        </a>
+        <a href="mailto:camilo@universomarin.com" class="cta-btn cta-btn-outline">
+            ✉️ camilo@universomarin.com
+        </a>
+    </div>
+
+    <div style="margin-top: 80px; padding: 32px; max-width: 700px; background: var(--dark2); border: 1px solid var(--border); border-radius: 16px;">
+        <div style="font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Lo único que te pido</div>
+        <p style="font-size: 16px; color: var(--white); line-height: 1.7;">
+            Que esta presentación quede entre nosotros. No la compartas con fondos, no la subas a redes, no le hables de esto a competidores. Esta es una conversación entre amigos.
+        </p>
+    </div>
+
+    <p style="margin-top: 60px; font-size: 13px; color: var(--gray);">
+        UniversoMarin Holding · Bogotá, Colombia · Abril 2026<br>
+        Camilo Marín — Founder & CEO
+    </p>
+</section>
+
+</body>
+</html>
