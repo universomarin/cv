@@ -218,6 +218,88 @@
             0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
             50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
         }
+
+        /* COVER hero visual */
+        .cover-slide { background: radial-gradient(ellipse at top, rgba(99,102,241,0.08), transparent 60%); overflow: hidden; }
+
+        .orb {
+            position: absolute; border-radius: 50%; pointer-events: none;
+            filter: blur(80px); opacity: 0.5; z-index: 0;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(99,102,241,0.4); top: -100px; left: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(59,130,246,0.35); top: 200px; right: -100px; animation: float 12s ease-in-out infinite; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(124,58,237,0.3); bottom: -50px; left: 30%; animation: float 16s ease-in-out infinite reverse; }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(40px, -40px); }
+        }
+
+        .hero-logo {
+            position: relative; width: 200px; height: 200px;
+            margin: 0 auto 40px; z-index: 2;
+        }
+        .hero-logo-inner {
+            position: relative; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-logo-svg {
+            width: 200px; height: 200px;
+            filter: drop-shadow(0 0 40px rgba(99,102,241,0.6));
+            animation: spin 30s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero-logo-pulse {
+            position: absolute; top: 50%; left: 50%;
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 2px solid rgba(99,102,241,0.5);
+            transform: translate(-50%, -50%);
+            animation: pulse-ring 3s ease-out infinite;
+        }
+        .hero-logo-pulse-2 { animation-delay: 1s; }
+        .hero-logo-pulse-3 { animation-delay: 2s; }
+        @keyframes pulse-ring {
+            0% { width: 100px; height: 100px; opacity: 1; border-color: rgba(99,102,241,0.6); }
+            100% { width: 280px; height: 280px; opacity: 0; border-color: rgba(99,102,241,0); }
+        }
+
+        .live-badges {
+            display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+            margin-bottom: 32px; z-index: 2; position: relative;
+        }
+        .live-badge {
+            display: inline-flex; align-items: center;
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: var(--green);
+            padding: 8px 16px; border-radius: 100px;
+            font-size: 13px; font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .scroll-indicator {
+            position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        .scroll-arrow {
+            font-size: 20px; color: var(--accent-light);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo, .hero-logo-svg { width: 140px; height: 140px; }
+            .hero-logo-pulse { width: 80px; height: 80px; }
+            .live-badges { gap: 8px; }
+            .live-badge { font-size: 11px; padding: 6px 12px; }
+            .orb { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -228,19 +310,61 @@
 </nav>
 
 <!-- ===== 1. COVER ===== -->
-<section class="slide" style="text-align: center; align-items: center;">
+<section class="slide cover-slide" style="text-align: center; align-items: center; padding-top: 120px;">
     <div class="glow"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Hero visual -->
+    <div class="hero-logo">
+        <div class="hero-logo-inner">
+            <div class="hero-logo-pulse"></div>
+            <div class="hero-logo-pulse hero-logo-pulse-2"></div>
+            <div class="hero-logo-pulse hero-logo-pulse-3"></div>
+            <svg class="hero-logo-svg" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="48" stroke="url(#grad1)" stroke-width="1.5" opacity="0.4"/>
+                <circle cx="50" cy="50" r="36" stroke="url(#grad1)" stroke-width="1.5" opacity="0.6"/>
+                <circle cx="50" cy="50" r="24" fill="url(#grad2)"/>
+                <path d="M35 50 Q42 35, 50 50 T65 50" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M30 50 L30 50 M70 50 L70 50 M50 30 L50 30 M50 70 L50 70" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#818cf8"/>
+                        <stop offset="100%" stop-color="#3b82f6"/>
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#6366f1"/>
+                        <stop offset="100%" stop-color="#3b82f6"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Live badges -->
+    <div class="live-badges">
+        <span class="live-badge"><span class="live-dot"></span>$7.200 USD MRR</span>
+        <span class="live-badge"><span class="live-dot"></span>18 clientes activos</span>
+        <span class="live-badge"><span class="live-dot"></span>Parlando.me en Chrome Store</span>
+    </div>
+
     <div class="tag">Una conversación con amigos</div>
-    <h1 class="headline" style="max-width: 1000px;">
+    <h1 class="headline" style="max-width: 1000px; margin-top: 8px;">
         ElevenLabs vale <span class="grad">$11.000 millones</span>.<br>
         UniversoMarin puede ser <span class="green">el siguiente</span>.
     </h1>
     <p class="subtext lg" style="text-align: center; margin: 24px auto 0;">
-        Esta presentación es para gente cercana que quiere entender qué estoy construyendo y cómo pueden ser parte temprana.<br><br>
+        Esta presentación es para gente cercana que quiere entender qué estoy construyendo y cómo pueden ser parte temprana.<br>
         Sin tecnicismos. Solo números reales y la oportunidad real.
     </p>
-    <div class="divider" style="margin: 40px auto;"></div>
+    <div class="divider" style="margin: 32px auto;"></div>
     <p style="font-size: 14px; color: var(--gray);">Camilo Marín · CEO & Founder · Abril 2026</p>
+
+    <div class="scroll-indicator">
+        <span>Desliza para ver</span>
+        <div class="scroll-arrow">↓</div>
+    </div>
 </section>
 
 <!-- ===== 2. EL CONTEXTO ===== -->
