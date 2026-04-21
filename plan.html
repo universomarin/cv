@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>El Plan — Camilo Marin · UniversoMarin</title>
+<meta name="description" content="La ruta: cómo construyo y vendo servicios digitales globales con IA, en cualquier idioma. Logo, Web, Pauta, Mentoría.">
+<meta property="og:title" content="El Plan — Camilo Marin">
+<meta property="og:description" content="La ruta del experimento: vender mundial con IA.">
+<meta property="og:url" content="https://universomarin.com/plan">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --text: #e5e5e5;
+    --text2: #999999;
+    --text3: #666666;
+    --border: rgba(255,255,255,0.08);
+    --accent: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #ccc; text-decoration: none; transition: color 0.2s; }
+  a:hover { color: #fff; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); padding: 16px 0;
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  .nav-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; color: #fff; }
+  .nav-name span { color: var(--text2); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: var(--text3); font-size: 13px; font-weight: 500; }
+
+  section { padding: 100px 0; border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: none; padding-top: 160px; }
+
+  .eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 3px;
+    color: var(--text3); margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95; letter-spacing: -3px;
+    color: #fff; margin-bottom: 32px;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -2px;
+    color: #fff; margin-bottom: 24px;
+  }
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 22px; letter-spacing: -0.5px;
+    color: #fff; margin-bottom: 12px;
+  }
+  .lead {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--text2);
+    max-width: 720px;
+    line-height: 1.5;
+  }
+  p { color: var(--text2); margin-bottom: 16px; }
+  p.big { font-size: 18px; color: var(--text); }
+
+  /* Hero */
+  .hero-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--text3); text-transform: uppercase; letter-spacing: 4px;
+    margin-bottom: 24px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #fff; color: #000;
+    padding: 18px 32px;
+    font-weight: 700; font-size: 15px;
+    border-radius: 6px;
+    margin-top: 32px;
+  }
+  .hero-cta:hover { color: #000; background: #e5e5e5; }
+
+  /* Stack visual (4 cards) */
+  .stack {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin-top: 48px;
+  }
+  @media (max-width: 900px) { .stack { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .stack { grid-template-columns: 1fr; } }
+  .stack-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .stack-card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+  .stack-card .step {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .stack-card .price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 700; color: #fff;
+    margin-top: 24px; letter-spacing: -1px;
+  }
+  .stack-card .price small {
+    font-size: 13px; color: var(--text3); font-weight: 400;
+  }
+
+  /* Arrow between steps */
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text3); font-size: 14px; letter-spacing: 2px;
+    margin: 24px 0;
+    text-transform: uppercase;
+  }
+  .flow-arrow::before, .flow-arrow::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+    margin: 0 16px;
+  }
+
+  /* Process steps */
+  .process {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    margin-top: 64px;
+  }
+  @media (max-width: 900px) { .process { grid-template-columns: 1fr; } }
+  .process-col h3 { margin-bottom: 24px; font-size: 20px; }
+  .process-col ol {
+    list-style: none; counter-reset: item;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .process-col ol li {
+    counter-increment: item;
+    padding-left: 48px; position: relative;
+    color: var(--text); font-size: 15px;
+    line-height: 1.6;
+  }
+  .process-col ol li::before {
+    content: counter(item, decimal-leading-zero);
+    position: absolute; left: 0; top: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--text3);
+    letter-spacing: 1px;
+  }
+  .process-col ol li strong { color: #fff; display: block; margin-bottom: 4px; font-weight: 600; }
+
+  /* Pricing table */
+  .prices {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-top: 48px;
+  }
+  @media (max-width: 900px) { .prices { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .prices { grid-template-columns: 1fr; } }
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: left;
+  }
+  .price-card .label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .price-card .amount {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 700; color: #fff;
+    letter-spacing: -1px; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .price-card .unit {
+    font-size: 12px; color: var(--text3);
+    margin-bottom: 16px;
+  }
+  .price-card .desc {
+    font-size: 13px; color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* Diagnostic upsell */
+  .upsell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    margin-top: 64px;
+  }
+  @media (max-width: 560px) { .upsell { padding: 32px 24px; } }
+  .upsell .tag {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; color: #000; background: #fff;
+    padding: 4px 10px; border-radius: 4px;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* Global strip */
+  .global-strip {
+    display: flex; flex-wrap: wrap; gap: 20px 40px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; color: var(--text2);
+    margin-top: 32px; letter-spacing: 0.5px;
+  }
+  .global-strip span { display: flex; align-items: center; gap: 8px; }
+
+  /* CTAs */
+  .cta-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-top: 40px;
+  }
+  @media (max-width: 900px) { .cta-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .cta-row { grid-template-columns: 1fr; } }
+  .cta-btn {
+    display: flex; flex-direction: column; align-items: flex-start;
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: all 0.2s;
+  }
+  .cta-btn:hover { border-color: #fff; background: rgba(255,255,255,0.04); color: #fff; }
+  .cta-btn small {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cta-btn strong { font-size: 15px; font-weight: 600; }
+
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border);
+    color: var(--text3);
+    font-size: 13px;
+  }
+  footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-name">Camilo Marin <span>/ el plan</span></div>
+    <div class="nav-links">
+      <a href="#stack">Stack</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#precios">Precios</a>
+      <a href="#empezar">Empezar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="container">
+    <div class="hero-sub">El Plan · El Experimento</div>
+    <h1>La ruta para vender mundial con IA.</h1>
+    <p class="lead">
+      Cuatro servicios conectados. Un proceso operativo en vivo. Documentación pública.
+      Así construyo y vendo — en cualquier idioma — desde Colombia para el mundo.
+    </p>
+    <a href="#stack" class="hero-cta">Ver la ruta →</a>
+  </div>
+</section>
+
+<!-- STACK: 4 servicios -->
+<section id="stack">
+  <div class="container">
+    <div class="eyebrow">El Stack</div>
+    <h2>Cuatro piezas. Un sistema.</h2>
+    <p class="lead">
+      Cada servicio resuelve una parte del viaje del cliente. Puedes entrar por cualquiera.
+      Cuando se juntan, vende sólo.
+    </p>
+
+    <div class="stack">
+      <div class="stack-card">
+        <div class="step">01 · Identidad</div>
+        <h3>Logo + Manual de Marca</h3>
+        <p>3 propuestas de logo, manual completo (paleta, tipografía, versiones y usos). Entrega en 5 días.</p>
+        <div class="price">$500 <small>USD · pago único</small></div>
+      </div>
+      <div class="stack-card">
+        <div class="step">02 · Lugar</div>
+        <h3>Página Web que vende</h3>
+        <p>Landing optimizada para convertir. Pixel Meta y analítica desde el día 1. Formulario a WhatsApp.</p>
+        <div class="price">$400 <small>USD · pago único</small></div>
+      </div>
+      <div class="stack-card">
+        <div class="step">03 · Tráfico</div>
+        <h3>Administración de Pauta</h3>
+        <p>Meta, TikTok y Google Ads. 2 campañas activas, A/B de creatividades, pixel bien configurado, reporte semanal. Cupo 15/mes.</p>
+        <div class="price">$400 <small>USD / mes</small></div>
+      </div>
+      <div class="stack-card">
+        <div class="step">04 · Aprender</div>
+        <h3>Mentoría 1:1</h3>
+        <p>Una hora conmigo, en vivo, operando pre-venta y post-venta. Queda grabada. Pagas antes de agendar.</p>
+        <div class="price">$100 <small>USD / hora</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO OPERATIVO -->
+<section id="proceso">
+  <div class="container">
+    <div class="eyebrow">Reality Operativo</div>
+    <h2>Lo que pasa en la hora de mentoría.</h2>
+    <p class="lead">
+      La mentoría no es teoría. Es el experimento funcionando en vivo.
+      30 minutos de pre-venta. 30 minutos de post-venta. Todo se graba.
+    </p>
+
+    <div class="process">
+      <div class="process-col">
+        <h3>Pre-venta · 30 min</h3>
+        <ol>
+          <li><strong>Leer conversaciones</strong>Abrimos WhatsApp y analizamos leads reales que llegaron hoy.</li>
+          <li><strong>Identificar patrones</strong>Detecto patrón del usuario + idioma. Te muestro cómo leer señales.</li>
+          <li><strong>Responder o automatizar</strong>Si es nuevo, respondo manual. Si es patrón repetido, automatizo con IA.</li>
+          <li><strong>Estrategia de seguimiento</strong>Armamos flow de seguimiento para ese caso específico.</li>
+          <li><strong>Cierre</strong>Cierro la venta en vivo o programamos el próximo contacto.</li>
+          <li><strong>Ajuste de anuncio</strong>Entro a Meta Ads, cambio objetivo o creatividad según lo que acabamos de ver.</li>
+        </ol>
+      </div>
+      <div class="process-col">
+        <h3>Post-venta · 30 min</h3>
+        <ol>
+          <li><strong>Llamada con cliente real</strong>Entramos a una llamada con cliente en otro idioma.</li>
+          <li><strong>Interpretación con Parlando</strong>Parlando.me traduce en tiempo real. Yo hablo español, cliente su idioma.</li>
+          <li><strong>Cierre internacional</strong>Cierro, agendo o hago seguimiento post-venta en vivo.</li>
+          <li><strong>Documentación</strong>Capturo el caso como contenido del experimento (con permiso).</li>
+          <li><strong>Automatización post-venta</strong>Armamos el flujo de onboarding y retención.</li>
+          <li><strong>Siguientes pasos</strong>Te llevas notas, grabación y el plan de aplicación para tu caso.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Diagnóstico IA — upsell natural -->
+    <div class="upsell">
+      <div class="tag">Siguiente paso</div>
+      <h3 style="font-size: 28px; margin-bottom: 16px;">Diagnóstico de automatización con IA</h3>
+      <p class="big">
+        Cuando veas el proceso completo, lo siguiente es mapearlo en tu negocio.
+        Diagnóstico 1:1 de qué tareas manuales se automatizan con IA, en qué orden, con qué herramientas,
+        y cuánto tiempo/plata recuperas. Servicio aparte — precio según alcance.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios">
+  <div class="container">
+    <div class="eyebrow">Precios</div>
+    <h2>Claros. En dólares. Sin letra chica.</h2>
+
+    <div class="prices">
+      <div class="price-card">
+        <div class="label">Logo + Marca</div>
+        <div class="amount">$500</div>
+        <div class="unit">USD · pago único</div>
+        <div class="desc">Identidad completa. 5 días de entrega. 3 propuestas. Manual de marca.</div>
+      </div>
+      <div class="price-card">
+        <div class="label">Página Web</div>
+        <div class="amount">$400</div>
+        <div class="unit">USD · pago único</div>
+        <div class="desc">Landing que convierte. Pixel y analítica desde el día 1. Formulario a tu WhatsApp.</div>
+      </div>
+      <div class="price-card">
+        <div class="label">Pauta / Trafficker</div>
+        <div class="amount">$400</div>
+        <div class="unit">USD / mes · cupo 15/mes</div>
+        <div class="desc">Meta, TikTok y Google Ads. 2 campañas, A/B, reporte semanal. Garantía 1er mes.</div>
+      </div>
+      <div class="price-card">
+        <div class="label">Mentoría 1:1</div>
+        <div class="amount">$100</div>
+        <div class="unit">USD / hora · grabada</div>
+        <div class="desc">Reality operativo en vivo. Pre-venta + post-venta. Pagas antes de agendar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section>
+  <div class="container">
+    <div class="eyebrow">Global</div>
+    <h2>Sin fronteras de idioma.</h2>
+    <p class="lead">
+      Atiendo leads en cualquier idioma con Parlando.me — un micrófono y un audífono virtual
+      que interpreta en tiempo real. Tú hablas el tuyo, yo el mío. Cerramos.
+    </p>
+    <div class="global-strip">
+      <span>🇨🇴 Colombia</span>
+      <span>🇲🇽 México</span>
+      <span>🇦🇷 Argentina</span>
+      <span>🇪🇸 España</span>
+      <span>🇺🇸 EE.UU.</span>
+      <span>🇦🇺 Australia</span>
+      <span>🇪🇨 Ecuador</span>
+      <span>+ LATAM / UK / CA</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTAs -->
+<section id="empezar">
+  <div class="container">
+    <div class="eyebrow">Empezar</div>
+    <h2>Escríbeme por WhatsApp.</h2>
+    <p class="lead">
+      Te pido 3-5 datos para calificar tu caso, te paso el link de pago y agendamos.
+      Operas directo conmigo — no con una agencia.
+    </p>
+
+    <div class="cta-row">
+      <a href="https://wa.me/573124860738?text=MARCA" class="cta-btn" target="_blank" rel="noopener">
+        <small>Identidad</small>
+        <strong>Quiero logo + marca</strong>
+      </a>
+      <a href="https://wa.me/573124860738?text=WEB" class="cta-btn" target="_blank" rel="noopener">
+        <small>Lugar</small>
+        <strong>Quiero página web</strong>
+      </a>
+      <a href="https://wa.me/573124860738?text=TRAFFICKER" class="cta-btn" target="_blank" rel="noopener">
+        <small>Tráfico</small>
+        <strong>Quiero vender más</strong>
+      </a>
+      <a href="https://wa.me/573124860738?text=MENTOR" class="cta-btn" target="_blank" rel="noopener">
+        <small>Aprender</small>
+        <strong>Quiero mentoría</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Camilo Marin · UniversoMarin</div>
+    <div>
+      <a href="/">Inicio</a> &nbsp;·&nbsp;
+      <a href="https://instagram.com/universomarin" target="_blank">@universomarin</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
