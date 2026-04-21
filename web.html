@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Página Web que vende — Camilo Marin</title>
+<meta name="description" content="Landing optimizada para convertir. Pixel Meta y analítica desde el día 1. $400 USD pago único. Entrega en 10 días.">
+<meta property="og:title" content="Página Web que vende · $400 USD">
+<meta property="og:description" content="Lista para recibir pauta desde el primer día.">
+<meta property="og:url" content="https://universomarin.com/web">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0a; --surface:#141414; --text:#e5e5e5; --text2:#999; --text3:#666; --border:rgba(255,255,255,0.08); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:#ccc;text-decoration:none;transition:color .2s;} a:hover{color:#fff;}
+  .container{max-width:1000px;margin:0 auto;padding:0 32px;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 0;}
+  nav .container{display:flex;justify-content:space-between;align-items:center;}
+  .nav-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff;}
+  .nav-name span{color:var(--text2);}
+  .nav-links{display:flex;gap:24px;}
+  .nav-links a{color:var(--text3);font-size:13px;font-weight:500;}
+  section{padding:100px 0;border-top:1px solid var(--border);}
+  section:first-of-type{border-top:none;padding-top:160px;}
+  .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:24px;}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,7vw,80px);line-height:1;letter-spacing:-2px;color:#fff;margin-bottom:28px;}
+  h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.5vw,48px);line-height:1.05;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
+  h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:22px;color:#fff;margin-bottom:12px;}
+  .lead{font-size:clamp(18px,2vw,22px);color:var(--text2);max-width:720px;line-height:1.5;}
+  p{color:var(--text2);margin-bottom:16px;}
+  p.big{font-size:18px;color:var(--text);}
+  .cta{display:inline-flex;align-items:center;gap:12px;background:#fff;color:#000;padding:18px 32px;font-weight:700;font-size:15px;border-radius:6px;margin-top:28px;}
+  .cta:hover{color:#000;background:#e5e5e5;}
+  .includes{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:700px){.includes{grid-template-columns:1fr;}}
+  .includes div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;font-size:14px;}
+  .includes div strong{color:#fff;display:block;margin-bottom:4px;font-family:'Space Grotesk',sans-serif;}
+  .steps{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  @media (max-width:900px){.steps{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.steps{grid-template-columns:1fr;}}
+  .steps .step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 18px;}
+  .steps .day{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+  .steps h3{font-size:16px;}
+  .steps p{font-size:13px;margin:0;}
+  .price-hero{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;margin-top:48px;display:flex;gap:32px;align-items:center;flex-wrap:wrap;}
+  .price-hero .amount{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;}
+  .price-hero .amount small{font-size:14px;color:var(--text3);font-weight:400;display:block;margin-top:8px;letter-spacing:0;}
+  .price-hero .info{flex:1;min-width:240px;}
+  footer{padding:60px 0 40px;border-top:1px solid var(--border);color:var(--text3);font-size:13px;}
+  footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-name">Camilo Marin <span>/ web</span></div>
+    <div class="nav-links">
+      <a href="/plan">El plan</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#empezar">Empezar</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">Página web que vende</div>
+    <h1>Un lugar que convierte visitas en leads.</h1>
+    <p class="lead">
+      Si no tienes página web, tu anuncio lleva al vacío. Si tienes una mala, tus visitas se van en tres segundos sin entender qué vendes. Yo te monto una que vende y rastrea cada visita.
+    </p>
+    <a href="https://wa.me/573124860738?text=WEB" class="cta" target="_blank" rel="noopener">Escribir WEB por WhatsApp →</a>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="container">
+    <div class="eyebrow">Proceso · 10 días</div>
+    <h2>De brief a live en una semana y media.</h2>
+    <p class="lead">Si tienes los activos listos (logo, textos, imágenes), hasta en un día. Si no, te ayudo a resolverlo.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="day">Día 1</div>
+        <h3>Brief</h3>
+        <p>Levanto qué vendes, a quién y cuál es el objetivo.</p>
+      </div>
+      <div class="step">
+        <div class="day">Día 2-7</div>
+        <h3>Construcción</h3>
+        <p>Monto la página con pixel y analítica desde el primer día.</p>
+      </div>
+      <div class="step">
+        <div class="day">Día 8-9</div>
+        <h3>Ajustes</h3>
+        <p>1 ronda de cambios sobre la versión final.</p>
+      </div>
+      <div class="step">
+        <div class="day">Día 10</div>
+        <h3>Live</h3>
+        <p>Dominio conectado, formulario a tu WhatsApp, lista para recibir pauta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">Qué incluye</div>
+    <h2>Lista para convertir desde el día uno.</h2>
+
+    <div class="includes">
+      <div><strong>Landing o sitio hasta 4 secciones</strong>Según lo que necesites.</div>
+      <div><strong>Pixel de Meta + analítica</strong>La cámara que vigila cada visita y entrena tu pauta.</div>
+      <div><strong>Formulario a tu WhatsApp</strong>Conversión directa a conversación.</div>
+      <div><strong>Responsive</strong>Se ve perfecto en mobile y desktop.</div>
+      <div><strong>Dominio y hosting</strong>Conectado y configurado.</div>
+      <div><strong>1 ronda de cambios</strong>Sobre la versión final antes de publicar.</div>
+    </div>
+
+    <div class="price-hero">
+      <div class="amount">$400<small>USD · pago único</small></div>
+      <div class="info">
+        <h3 style="margin-bottom:8px;">Entrega en 10 días.</h3>
+        <p>Trabajas directo conmigo. Brief, construcción, ajuste, live. Sin cinco reuniones de agencia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="empezar">
+  <div class="container">
+    <div class="eyebrow">Empezar</div>
+    <h2>Escríbeme por WhatsApp.</h2>
+    <p class="lead">
+      Te pregunto qué vendes, reviso tus activos listos, te paso link de pago y agendamos kickoff.
+    </p>
+    <a href="https://wa.me/573124860738?text=WEB" class="cta" target="_blank" rel="noopener">Escribir WEB por WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Camilo Marin · UniversoMarin</div>
+    <div><a href="/plan">Volver al plan</a> &nbsp;·&nbsp; <a href="https://instagram.com/universomarin" target="_blank">@universomarin</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

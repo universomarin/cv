@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mentoría 1:1 — Reality Operativo · Camilo Marin</title>
+<meta name="description" content="Una hora conmigo operando en vivo. 30 min pre-venta + 30 min post-venta con cliente real en otro idioma. $100 USD · pagas antes de agendar.">
+<meta property="og:title" content="Mentoría 1:1 · $100 USD — Reality Operativo">
+<meta property="og:description" content="El experimento funcionando en vivo. Queda grabada.">
+<meta property="og:url" content="https://universomarin.com/mentoria">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0a; --surface:#141414; --text:#e5e5e5; --text2:#999; --text3:#666; --border:rgba(255,255,255,0.08); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:#ccc;text-decoration:none;transition:color .2s;} a:hover{color:#fff;}
+  .container{max-width:1000px;margin:0 auto;padding:0 32px;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 0;}
+  nav .container{display:flex;justify-content:space-between;align-items:center;}
+  .nav-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff;}
+  .nav-name span{color:var(--text2);}
+  .nav-links{display:flex;gap:24px;}
+  .nav-links a{color:var(--text3);font-size:13px;font-weight:500;}
+  section{padding:100px 0;border-top:1px solid var(--border);}
+  section:first-of-type{border-top:none;padding-top:160px;}
+  .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:24px;}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(44px,7vw,80px);line-height:1;letter-spacing:-2px;color:#fff;margin-bottom:28px;}
+  h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.5vw,48px);line-height:1.05;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
+  h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:22px;color:#fff;margin-bottom:12px;}
+  .lead{font-size:clamp(18px,2vw,22px);color:var(--text2);max-width:720px;line-height:1.5;}
+  p{color:var(--text2);margin-bottom:16px;}
+  p.big{font-size:18px;color:var(--text);}
+  .cta{display:inline-flex;align-items:center;gap:12px;background:#fff;color:#000;padding:18px 32px;font-weight:700;font-size:15px;border-radius:6px;margin-top:28px;}
+  .cta:hover{color:#000;background:#e5e5e5;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px;}
+  @media (max-width:900px){.grid2{grid-template-columns:1fr;}}
+  .col h3{font-size:20px;margin-bottom:24px;}
+  .col ol{list-style:none;counter-reset:item;display:flex;flex-direction:column;gap:20px;}
+  .col ol li{counter-increment:item;padding-left:48px;position:relative;color:var(--text);font-size:15px;line-height:1.6;}
+  .col ol li::before{content:counter(item,decimal-leading-zero);position:absolute;left:0;top:0;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text3);letter-spacing:1px;}
+  .col ol li strong{color:#fff;display:block;margin-bottom:4px;font-weight:600;}
+  .price-hero{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;margin-top:48px;display:flex;gap:32px;align-items:center;flex-wrap:wrap;}
+  .price-hero .amount{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;}
+  .price-hero .amount small{font-size:14px;color:var(--text3);font-weight:400;display:block;margin-top:8px;letter-spacing:0;}
+  .price-hero .info{flex:1;min-width:240px;}
+  .includes{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:700px){.includes{grid-template-columns:1fr;}}
+  .includes div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;font-size:14px;}
+  .includes div strong{color:#fff;display:block;margin-bottom:4px;font-family:'Space Grotesk',sans-serif;}
+  footer{padding:60px 0 40px;border-top:1px solid var(--border);color:var(--text3);font-size:13px;}
+  footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-name">Camilo Marin <span>/ mentoría</span></div>
+    <div class="nav-links">
+      <a href="/plan">El plan</a>
+      <a href="#reality">Qué pasa</a>
+      <a href="#empezar">Empezar</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">Mentoría 1:1 · Reality Operativo</div>
+    <h1>Una hora. El sistema funcionando frente a ti.</h1>
+    <p class="lead">
+      No es teoría. Operamos juntos: mi WhatsApp, mi Meta Ads, una llamada con un cliente real en otro idioma.
+      Te llevas la grabación, las notas y el plan de aplicación.
+    </p>
+    <a href="https://wa.me/573124860738?text=MENTOR" class="cta" target="_blank" rel="noopener">Escribir MENTOR por WhatsApp →</a>
+  </div>
+</section>
+
+<section id="reality">
+  <div class="container">
+    <div class="eyebrow">Cómo funciona la hora</div>
+    <h2>30 minutos de pre-venta. 30 minutos de post-venta.</h2>
+    <p class="lead">Todo en vivo, con datos reales. Queda grabada para que la revises las veces que quieras.</p>
+
+    <div class="grid2">
+      <div class="col">
+        <h3>Pre-venta · 30 min</h3>
+        <ol>
+          <li><strong>Leer conversaciones</strong>Abrimos mi WhatsApp y revisamos leads reales del día.</li>
+          <li><strong>Identificar patrones</strong>Te muestro cómo leo señales por idioma y tipo de cliente.</li>
+          <li><strong>Responder o automatizar</strong>Decidimos qué es manual y qué va a IA.</li>
+          <li><strong>Seguimiento</strong>Armamos flow de seguimiento para el caso.</li>
+          <li><strong>Cierre</strong>Cierro en vivo o programo el próximo contacto.</li>
+          <li><strong>Ajuste de anuncio</strong>Entramos a Meta Ads y cambiamos objetivo o creativa según lo que vimos.</li>
+        </ol>
+      </div>
+      <div class="col">
+        <h3>Post-venta · 30 min</h3>
+        <ol>
+          <li><strong>Llamada con cliente real</strong>Entramos a una reunión con un cliente en otro idioma.</li>
+          <li><strong>Interpretación con Parlando</strong>Yo hablo español, el cliente su idioma. Parlando traduce.</li>
+          <li><strong>Cierre internacional</strong>Cierro, agendo o hago seguimiento en vivo.</li>
+          <li><strong>Documentación del caso</strong>Capturo el caso como contenido del experimento.</li>
+          <li><strong>Automatización post-venta</strong>Armamos flujo de onboarding o retención.</li>
+          <li><strong>Siguientes pasos</strong>Te llevas notas, grabación y plan para tu caso.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">Qué incluye</div>
+    <h2>La hora + lo que te llevas después.</h2>
+
+    <div class="includes">
+      <div><strong>60 min en vivo</strong>Zoom/Meet contigo.</div>
+      <div><strong>Grabación completa</strong>Te la mando en 24h.</div>
+      <div><strong>Notas estructuradas</strong>Resumen con siguientes pasos.</div>
+      <div><strong>Acceso a Parlando</strong>Si quieres probarlo en una llamada.</div>
+    </div>
+
+    <div class="price-hero">
+      <div class="amount">$100<small>USD / hora · pago único</small></div>
+      <div class="info">
+        <h3 style="margin-bottom:8px;">Pagas antes de agendar.</h3>
+        <p>Así filtramos curiosos y la hora rinde. Cupo limitado cada mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="empezar">
+  <div class="container">
+    <div class="eyebrow">Empezar</div>
+    <h2>Escríbeme por WhatsApp.</h2>
+    <p class="lead">
+      Te pregunto 3 cosas para calificar, te paso el link de pago, agendamos en mi calendario.
+      Lo atiendo yo directamente.
+    </p>
+    <a href="https://wa.me/573124860738?text=MENTOR" class="cta" target="_blank" rel="noopener">Escribir MENTOR por WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Camilo Marin · UniversoMarin</div>
+    <div><a href="/plan">Volver al plan</a> &nbsp;·&nbsp; <a href="https://instagram.com/universomarin" target="_blank">@universomarin</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
