@@ -224,6 +224,37 @@
     margin-bottom: 16px;
   }
 
+  /* Objetivos 90 días */
+  .objetivos-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-top: 48px;
+  }
+  @media (max-width: 900px) { .objetivos-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .objetivos-grid { grid-template-columns: 1fr; } }
+  .obj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: left;
+  }
+  .obj-card .number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56px; font-weight: 700; color: #fff;
+    letter-spacing: -2px; line-height: 1;
+    margin-bottom: 12px;
+  }
+  .obj-card .obj-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .obj-card .obj-desc {
+    font-size: 13px; color: var(--text2);
+    line-height: 1.5;
+  }
+
   /* Global strip */
   .global-strip {
     display: flex; flex-wrap: wrap; gap: 20px 40px;
@@ -275,6 +306,7 @@
       <a href="#stack">Stack</a>
       <a href="#proceso">Proceso</a>
       <a href="#precios">Precios</a>
+      <a href="#objetivos">Objetivos</a>
       <a href="#empezar">Empezar</a>
     </div>
   </div>
@@ -410,6 +442,41 @@
         <div class="amount">$100</div>
         <div class="unit">USD / hora · grabada</div>
         <div class="desc">Reality operativo en vivo. Pre-venta + post-venta. Pagas antes de agendar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJETIVOS 90 DÍAS -->
+<section id="objetivos">
+  <div class="container">
+    <div class="eyebrow">Objetivos · 90 días</div>
+    <h2>La apuesta pública.</h2>
+    <p class="lead">
+      Todo este plan existe para conquistar cuatro números antes de tres meses.
+      Documentados en vivo — sin filtros, sin retoques.
+    </p>
+
+    <div class="objetivos-grid">
+      <div class="obj-card">
+        <div class="number">3</div>
+        <div class="obj-label">Idiomas</div>
+        <div class="obj-desc">Validar ventas en al menos 3 idiomas diferentes. Uno debe ser fuera del español.</div>
+      </div>
+      <div class="obj-card">
+        <div class="number">&lt;$10</div>
+        <div class="obj-label">CAC</div>
+        <div class="obj-desc">Costo por conversación debajo de $10 USD en al menos 2 idiomas.</div>
+      </div>
+      <div class="obj-card">
+        <div class="number">5</div>
+        <div class="obj-label">Clientes</div>
+        <div class="obj-desc">Primeros 5 clientes internacionales cerrados por este flujo.</div>
+      </div>
+      <div class="obj-card">
+        <div class="number">100%</div>
+        <div class="obj-label">Público</div>
+        <div class="obj-desc">Cada paso documentado en YouTube + Instagram. Sin filtros.</div>
       </div>
     </div>
   </div>
