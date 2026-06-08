@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>El milagro de la voz — Manuscrito privado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --brand: #A62CCE;
+    --brand-deep: #490C6A;
+    --accent: #00D9FF;
+    --gradient: linear-gradient(135deg, #490C6A 0%, #A62CCE 100%);
+
+    /* Reading theme: "paper" (default) */
+    --bg: #FBF9F5;
+    --page: #FFFFFF;
+    --ink: #1E1A17;
+    --ink-soft: #5A5048;
+    --ink-faint: #9B9388;
+    --rule: #E7E1D6;
+    --sidebar-bg: #F4F0E9;
+
+    --serif: 'Spectral', Georgia, 'Times New Roman', serif;
+    --display: 'Fraunces', Georgia, serif;
+    --ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --measure: 38rem;
+  }
+  html[data-theme="sepia"] {
+    --bg: #F2E8D5; --page: #F7EEDC; --ink: #3A2E1E; --ink-soft: #6B5A42; --ink-faint: #A08B6B;
+    --rule: #E0D2B6; --sidebar-bg: #EADFC6;
+  }
+  html[data-theme="night"] {
+    --bg: #16131A; --page: #1C1822; --ink: #E9E4EF; --ink-soft: #ABA1BA; --ink-faint: #6E647E;
+    --rule: #2C2536; --sidebar-bg: #141019;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--serif);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+  }
+
+  /* ---------------- Sidebar / TOC ---------------- */
+  aside.toc {
+    width: 290px; flex-shrink: 0; background: var(--sidebar-bg);
+    border-right: 1px solid var(--rule); height: 100vh; position: sticky; top: 0;
+    overflow-y: auto; padding: 32px 26px; font-family: var(--ui);
+  }
+  .toc .badge { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .toc .badge .dot { width: 22px; height: 22px; border-radius: 6px; background: var(--gradient); box-shadow: 0 0 14px rgba(166,44,206,.4); }
+  .toc .badge b { font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
+  .toc .priv { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 26px; }
+  .toc h6 { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin: 22px 0 10px; font-weight: 700; }
+  .toc a { display: block; font-size: 14px; color: var(--ink-soft); text-decoration: none; padding: 7px 10px; border-radius: 7px; line-height: 1.4; transition: background .15s, color .15s; }
+  .toc a:hover { background: rgba(166,44,206,.08); color: var(--ink); }
+  .toc a.active { background: var(--gradient); color: #fff; }
+  .toc a .n { font-family: var(--display); font-weight: 600; opacity: .75; margin-right: 8px; }
+  .toc a.draft::after { content: "borrador"; float: right; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); background: var(--rule); padding: 2px 6px; border-radius: 99px; margin-top: 2px; }
+
+  /* ---------------- Toolbar ---------------- */
+  .toolbar {
+    position: fixed; top: 18px; right: 24px; z-index: 50; display: flex; gap: 8px;
+    font-family: var(--ui);
+  }
+  .toolbar button {
+    font-family: var(--ui); font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--rule); background: var(--page); color: var(--ink);
+    padding: 9px 14px; border-radius: 99px; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .toolbar button:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+  .toolbar .export { background: var(--gradient); color: #fff; border-color: transparent; box-shadow: 0 4px 18px rgba(166,44,206,.35); }
+
+  /* ---------------- Reading area ---------------- */
+  main { flex: 1; min-width: 0; display: flex; justify-content: center; }
+  .book { width: 100%; max-width: 56rem; padding: 0 32px 120px; }
+
+  /* Title page */
+  .titlepage {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px 0;
+  }
+  .titlepage .kicker { font-family: var(--ui); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+  .titlepage h1 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 8vw, 88px); line-height: 1.0; letter-spacing: -.03em; margin: 26px 0 18px; }
+  .titlepage .by { font-family: var(--ui); font-size: 17px; color: var(--ink-soft); }
+  .titlepage .by b { color: var(--ink); }
+  .titlepage .epigraph { max-width: 30rem; margin-top: 54px; font-style: italic; font-size: 19px; color: var(--ink-soft); line-height: 1.6; }
+  .titlepage .wave { display: flex; gap: 5px; align-items: flex-end; height: 40px; margin: 40px 0 0; }
+  .titlepage .wave span { width: 5px; border-radius: 3px; background: var(--gradient); }
+
+  /* Chapter */
+  .chapter { padding-top: 90px; max-width: var(--measure); margin: 0 auto; }
+  .chapter > * { max-width: var(--measure); }
+  .ch-part { font-family: var(--ui); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+  .ch-num { font-family: var(--display); font-size: 16px; color: var(--ink-faint); margin-top: 8px; letter-spacing: .04em; }
+  .chapter h2 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; letter-spacing: -.025em; margin: 10px 0 8px; }
+  .chapter .deck { font-style: italic; font-size: 20px; color: var(--ink-soft); margin: 14px 0 36px; line-height: 1.5; }
+  .chapter p { font-size: 19px; margin-bottom: 1.25em; hanging-punctuation: first; }
+  .chapter p.first { margin-top: 0; }
+  .chapter p.first::first-letter {
+    font-family: var(--display); font-weight: 600; float: left; font-size: 4.4em; line-height: .82;
+    padding: 6px 12px 0 0; color: var(--brand);
+  }
+  .chapter h3 { font-family: var(--display); font-weight: 600; font-size: 26px; margin: 40px 0 12px; letter-spacing: -.01em; }
+  .chapter blockquote {
+    margin: 32px 0; padding: 4px 0 4px 26px; border-left: 3px solid var(--brand);
+    font-style: italic; font-size: 21px; color: var(--ink); line-height: 1.5;
+  }
+  .chapter .sep { text-align: center; color: var(--ink-faint); letter-spacing: .6em; margin: 38px 0; font-size: 18px; }
+  .chapter .note {
+    font-family: var(--ui); font-size: 14px; background: rgba(166,44,206,.07);
+    border: 1px dashed var(--brand); border-radius: 10px; padding: 14px 18px; color: var(--ink-soft); margin: 24px 0;
+  }
+  .chapter .note b { color: var(--brand); }
+  .draft-banner {
+    font-family: var(--ui); font-size: 14px; color: var(--ink-soft); background: var(--sidebar-bg);
+    border: 1px solid var(--rule); border-radius: 12px; padding: 22px 24px; margin-top: 20px;
+  }
+  .draft-banner ul { margin: 10px 0 0 18px; }
+  .draft-banner li { margin-bottom: 4px; }
+
+  /* ---------------- Responsive ---------------- */
+  .menu-btn { display: none; }
+  .scrim { display: none; }
+
+  @media (max-width: 880px) {
+    body { display: block; }
+    aside.toc {
+      position: fixed; left: 0; top: 0; width: min(82vw, 320px);
+      transform: translateX(-100%); transition: transform .25s ease; z-index: 70;
+      box-shadow: 8px 0 30px rgba(0,0,0,.25);
+    }
+    body.menu-open aside.toc { transform: translateX(0); }
+    .scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 65; }
+    body.menu-open .scrim { opacity: 1; pointer-events: auto; }
+    .menu-btn { display: inline-flex; }
+
+    /* Toolbar becomes a floating reader bar at the bottom — never overlaps text */
+    .toolbar {
+      top: auto; bottom: 14px; left: 12px; right: 12px;
+      justify-content: center; flex-wrap: wrap; gap: 8px;
+    }
+    .toolbar button { font-size: 12px; padding: 9px 13px; box-shadow: 0 6px 20px rgba(0,0,0,.22); }
+
+    .book { padding: 0 20px 120px; }
+    .titlepage { min-height: 90vh; }
+    .chapter { padding-top: 64px; }
+    .chapter p { font-size: 17.5px; }
+    .chapter .deck { font-size: 18px; }
+    .chapter blockquote { font-size: 19px; padding-left: 18px; }
+    .chapter p.first::first-letter { font-size: 3.8em; }
+  }
+
+  @media (max-width: 460px) {
+    .book { padding: 0 16px 120px; }
+    .toolbar button { font-size: 11.5px; padding: 8px 11px; }
+    .chapter p { font-size: 17px; }
+    .titlepage h1 { font-size: 13vw; }
+    .chapter p.first::first-letter { font-size: 3.2em; padding-right: 8px; }
+  }
+
+  /* ---------------- Print / Export to PDF ---------------- */
+  @page { margin: 2.2cm 2cm; }
+  @media print {
+    .toolbar, aside.toc, .menu-btn { display: none !important; }
+    body { display: block; background: #fff; color: #000; }
+    html { --ink:#000; --ink-soft:#333; --rule:#ccc; --brand:#490C6A; }
+    main { display: block; }
+    .book { max-width: none; padding: 0; }
+    .titlepage { min-height: 70vh; page-break-after: always; }
+    .chapter { page-break-before: always; padding-top: 0; max-width: none; }
+    .chapter > *, .chapter { max-width: 34rem; margin-left: auto; margin-right: auto; }
+    .chapter p { font-size: 12pt; line-height: 1.55; orphans: 3; widows: 3; }
+    .chapter h2 { font-size: 26pt; }
+    .chapter h3, .chapter blockquote, .titlepage h1 { page-break-after: avoid; }
+    .note, .draft-banner { display: none; }
+    a { color: #000; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- TOC -->
+  <aside class="toc" id="toc">
+    <div class="badge"><span class="dot"></span><b>UniversoMarin</b></div>
+    <div class="priv">Manuscrito privado</div>
+    <nav id="tocnav"></nav>
+  </aside>
+
+  <!-- Scrim for mobile menu -->
+  <div class="scrim" onclick="document.body.classList.remove('menu-open')"></div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <button class="menu-btn" onclick="document.body.classList.toggle('menu-open')">☰ Índice</button>
+    <button onclick="cycleTheme()" id="themeBtn">◐ Tema</button>
+    <button class="export" onclick="window.print()">⤓ Exportar a PDF</button>
+  </div>
+
+  <main>
+    <div class="book">
+
+      <!-- TITLE PAGE -->
+      <section class="titlepage" id="portada" data-toc="Portada">
+        <div class="kicker">UniversoMarin · Libros</div>
+        <h1>El milagro<br />de la voz</h1>
+        <p class="by">por <b>Juan Camilo Marín Segura</b></p>
+        <div class="wave">
+          <span style="height:45%"></span><span style="height:85%"></span><span style="height:60%"></span>
+          <span style="height:100%"></span><span style="height:72%"></span><span style="height:92%"></span>
+          <span style="height:50%"></span><span style="height:68%"></span><span style="height:38%"></span>
+        </div>
+        <p class="epigraph">
+          “Durante toda la historia, tu lugar de nacimiento y tu idioma decidieron en qué podías
+          trabajar. Este es el libro de cómo eso, por fin, se está acabando.”
+        </p>
+      </section>
+
+      <!-- APERTURA -->
+      <section class="chapter" id="apertura" data-toc="El milagro que ya está pasando" data-group="Apertura">
+        <div class="ch-part">Apertura</div>
+        <div class="ch-num">El milagro que ya está pasando</div>
+        <h2>El milagro que ya está pasando</h2>
+        <p class="deck">Antes de que te explique nada, quiero que conozcas a alguien. Probablemente se parece a ti más de lo que crees.</p>
+
+        <p class="first">Hay una persona, en este mismo instante, sentada frente a un computador en una ciudad que tú no ubicarías en un mapa. Afuera pasa una moto, ladra un perro, alguien vende algo a gritos. Adentro, esa persona está en una reunión con un equipo que vive a nueve mil kilómetros, en una empresa cuyo nombre tú sí conoces. Le pagan en una moneda más fuerte que la de su país. Nunca ha pisado una oficina. Y hace cinco años, nadie —empezando por ella misma— habría creído que esto era posible.</p>
+
+        <p>No es un genio. No ganó una lotería. No tuvo un tío con contactos. Lo único que hizo fue aprender una habilidad que el mundo necesitaba y encontrar la forma de ofrecerla sin pedirle permiso a la frontera. Eso es todo. Y eso, hoy, basta.</p>
+
+        <p>Te cuento esto porque quiero que arranquemos por el lugar correcto. La mayoría de los libros sobre el futuro del trabajo empiezan asustándote: que los robots, que la inteligencia artificial, que tu empleo está en peligro. Este empieza al revés. Este empieza diciéndote que la oportunidad más grande de tu vida ya está sobre la mesa, ya le está cambiando la existencia a personas comunes, y que lo único raro es cuántos todavía no la ven.</p>
+
+        <h3>Lo que casi todos creen</h3>
+        <p>Si yo te preguntara hoy “¿de qué depende conseguir un buen trabajo?”, lo más probable es que me respondas con alguna versión de esto: depende de dónde naciste, de qué estudiaste, de a quién conoces y, sobre todo, de si hablas inglés. Es lo que nos enseñaron. Es lo que repiten en las casas, en los colegios, en los almuerzos familiares. “Estudia, consigue un cartón, aprende inglés y a ver si te sale algo”.</p>
+
+        <p>Esa frase parece sabiduría. En realidad es un mapa viejo de un territorio que ya cambió.</p>
+
+        <h3>Pero esto es mucho más profundo</h3>
+        <p>Aquí es donde quiero que te detengas, porque es la idea que sostiene todo el libro y vale la pena decirla despacio: <strong>el idioma, el lugar y el cartón nunca fueron habilidades. Fueron peajes.</strong> Casetas de cobro que alguien puso en el camino y que nosotros, de tanto verlas, confundimos con el camino mismo.</p>
+
+        <p>Un peaje no produce nada. No te hace mejor en lo que haces. Solo decide quién pasa y quién se queda. Durante siglos, hablar el idioma correcto o haber nacido en el país correcto fue el peaje que separaba al talento de la oportunidad. Y como todos lo pagaban, parecía una ley de la naturaleza. No lo era. Era tecnología pendiente. Y la tecnología que faltaba para tumbar ese peaje por fin llegó.</p>
+
+        <blockquote>El talento siempre estuvo repartido por igual en el mundo. Lo que nunca estuvo repartido por igual fue el permiso de usarlo.</blockquote>
+
+        <p>Este libro trata de eso: de cómo recuperar ese permiso. No con una arenga de motivación que se te olvida el lunes, sino con rutas concretas —las mismas que personas reales ya caminaron— y con una mirada honesta al futuro cercano, uno donde tu voz podrá hablar y escuchar cualquier idioma en tiempo real, y donde el último peaje, el del idioma, simplemente dejará de existir.</p>
+
+        <div class="sep">· · ·</div>
+
+        <p>Voy a hacer algo poco común para un autor: te voy a usar a ti, y me voy a usar a mí, como los dos primeros casos del libro. A ti porque, si llegaste hasta esta página, ya sospechas que mereces algo más grande que el lugar donde estás. Y a mí porque yo no escribo esto desde una torre. Lo escribo desde adentro: construyo la tecnología que va a tumbar ese último peaje, y antes de construirla tuve que tumbar, uno por uno, los peajes que tenía en mi propia cabeza.</p>
+
+        <p>Empecemos por el más grande de todos: la idea de que el trabajo es un lugar al que se va.</p>
+
+        <div class="note"><b>Para Juan Camilo:</b> aquí, en la versión final, podemos abrir con un <b>caso real</b> tuyo o de tu equipo (nombre, oficio, cómo consiguió el trabajo remoto) para que la primera escena sea verídica y con nombre propio. Dime el caso y lo incrusto.</div>
+      </section>
+
+      <!-- PARTE I -->
+      <section class="chapter" id="cap1" data-toc="El trabajo cambió de lugar" data-group="Parte I · La oportunidad ya existe">
+        <div class="ch-part">Parte I · La oportunidad ya existe</div>
+        <div class="ch-num">Capítulo uno</div>
+        <h2>El trabajo cambió de lugar</h2>
+        <p class="deck">Durante toda la historia, trabajar fue ir a un sitio. Esa regla acaba de romperse, y casi nadie ha terminado de entender lo que eso significa.</p>
+
+        <p class="first">Mi abuelo medía el trabajo en distancia. Se levantaba antes del sol, caminaba, tomaba un bus, llegaba a un lugar, marcaba una tarjeta y empezaba a existir como trabajador. Cuando volvía a casa, dejaba de serlo. El trabajo era un sitio físico, con una puerta, y esa puerta quedaba donde quedaba. Si ese sitio no existía cerca de donde tú vivías, no había trabajo. Así de simple y así de cruel.</p>
+
+        <p>Durante miles de años esa fue la regla del juego para todo el mundo. El campesino trabajaba donde estaba la tierra. El comerciante, donde estaba el mercado. El obrero, donde estaba la fábrica. Tu geografía era tu destino. Nacías en un punto del mapa y ese punto te entregaba, casi entero, el menú de vidas posibles. Por eso la gente migraba: no porque quisiera dejar lo suyo, sino porque la oportunidad tenía dirección física y a veces no era la tuya.</p>
+
+        <h3>La creencia que heredamos</h3>
+        <p>De esa historia tan larga nos quedó una creencia metida hasta los huesos: que para prosperar hay que estar cerca. Cerca de la capital, cerca de la empresa, cerca del país rico, cerca de donde “pasan las cosas”. Crecimos oyendo que el que quiere progresar tiene que irse: a la ciudad grande, al norte, a otro continente. Que el éxito vive en otra parte y a uno le toca ir a buscarlo, maleta en mano.</p>
+
+        <p>Esa creencia tuvo sentido durante siglos. El problema es que la seguimos repitiendo después de que dejó de ser verdad.</p>
+
+        <h3>Lo que de verdad pasó</h3>
+        <p>En muy pocos años, sin que sonara ninguna alarma, el trabajo se separó del lugar. No todo el trabajo —el cirujano todavía tiene que estar junto al paciente, el panadero junto al horno—, pero sí una porción enorme y creciente: todo lo que se puede hacer a través de una pantalla. Y resulta que eso es muchísimo más de lo que pensamos. Escribir, diseñar, programar, vender, enseñar, traducir, analizar, atender, crear. Profesiones enteras dejaron de necesitar un edificio.</p>
+
+        <p>Cuando el trabajo se desprende del lugar, una palabra que parecía inofensiva se vuelve dinamita: <strong>acceso</strong>. Si lo que importa ya no es dónde estás sino qué sabes hacer y si tienes cómo ofrecerlo, entonces el mapa de las oportunidades deja de tener fronteras y empieza a tener otra forma. Una forma donde una persona en un pueblo y una persona en una capital pueden competir por el mismo trabajo —y, a veces, gana la del pueblo.</p>
+
+        <blockquote>El trabajo dejó de ser un lugar al que vas. Se volvió algo que haces. Y lo que haces, a diferencia de un lugar, sí cabe en una maleta del tamaño de un computador.</blockquote>
+
+        <p>Quiero ser honesto contigo, porque este libro no te va a vender humo. Que el trabajo se haya desprendido del lugar no significa que la cancha quedó pareja de un día para otro. Quedan barreras, y son reales: hace falta una habilidad que el mundo pague, hace falta un computador y una conexión, hace falta saber dónde tocar la puerta, y —la más terca de todas— hace falta el idioma. A cada una de esas barreras le voy a dedicar su propio capítulo, con su propia ruta para cruzarla.</p>
+
+        <p>Pero antes de las rutas, tenemos que hablar de la barrera que no está en el mundo sino adentro de ti. Porque te puedo dar el mapa más detallado del planeta y de nada sirve si, en el fondo, no crees que ese tesoro es para alguien como tú. Y para hablarte de esa barrera con la cara en alto, primero tengo que contarte mi propia historia. Sin adornos.</p>
+
+        <div class="note"><b>Nota de trabajo:</b> en este capítulo conviene insertar 2–3 <b>datos duros</b> (porcentaje de trabajo remoto post-2020, tamaño del freelancing global) y un <b>caso real</b> de alguien de pueblo/ciudad pequeña trabajando para el exterior. Marcados para llenar con fuentes verificables.</p></div>
+      </section>
+
+      <!-- DRAFT CHAPTERS (structure visible, content pending) -->
+      <section class="chapter" id="cap2" data-toc="Yo mismo soy un caso" data-group="Parte I · La oportunidad ya existe" data-draft="1">
+        <div class="ch-part">Parte I · La oportunidad ya existe</div>
+        <div class="ch-num">Capítulo dos</div>
+        <h2>Yo mismo soy un caso</h2>
+        <p class="deck">No partí de la pobreza. Partí de una creencia. Y esa, resultó, era el muro más difícil de todos.</p>
+        <div class="draft-banner">
+          <b>Capítulo en escritura.</b> Guion acordado:
+          <ul>
+            <li>La verdad honesta: estrato medio, padres que te dieron la base. No el relato de “salí de la pobreza”.</li>
+            <li>El momento en que, teniéndolo todo, te sentiste marginal. (← escena de apertura: necesito ese recuerdo concreto.)</li>
+            <li>mejorando.la / Platzi: aprender habilidades por internet y volverte nómada digital.</li>
+            <li>El giro: de sentirte marginal a sentir agencia (autoexigencia + conexiones). La lección enmarcada como agencia, no como bando político.</li>
+            <li>La gratitud como hilo: honrar la base recibida abriéndole la ruta a quien no la tuvo.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="chapter" id="cap3" data-toc="El muro está en tu cabeza" data-group="Parte II · El muro invisible" data-draft="1">
+        <div class="ch-part">Parte II · El muro invisible</div>
+        <div class="ch-num">Capítulo tres</div>
+        <h2>El muro está en tu cabeza</h2>
+        <p class="deck">El merecimiento, la forma de pensar y la agencia: por qué la barrera más alta no es económica.</p>
+        <div class="draft-banner"><b>Capítulo en escritura.</b> Núcleo: el merecimiento como el muro más profundo. “Lo tenía todo y aun así me sentía marginal” → el muro no es económico, es mental, y por eso le toca a todos. Escasez vs. agencia.</div>
+      </section>
+
+      <section class="chapter" id="cap4" data-toc="El cuerpo también es un muro" data-group="Parte II · El muro invisible" data-draft="1">
+        <div class="ch-part">Parte II · El muro invisible</div>
+        <div class="ch-num">Capítulo cuatro</div>
+        <h2>El cuerpo también es un muro</h2>
+        <p class="deck">Homenaje a Jaramillo: sin energía no hay ambición que se sostenga.</p>
+        <div class="draft-banner"><b>Capítulo en escritura.</b> La alimentación y el cuerpo como base de todo: un cerebro cansado e inflamado no aprende ni se atreve. Cuidar el motor para poder correr la ruta.</div>
+      </section>
+
+      <section class="chapter" id="cap5" data-toc="Las rutas por habilidad" data-group="Parte III · Las rutas" data-draft="1">
+        <div class="ch-part">Parte III · Las rutas</div>
+        <div class="ch-num">Capítulo cinco</div>
+        <h2>Las rutas por habilidad</h2>
+        <p class="deck">Escribir, diseñar, programar, vender, enseñar. Cada ruta con puerta de entrada y puerta avanzada.</p>
+        <div class="draft-banner"><b>Capítulo(s) en escritura.</b> El corazón práctico del libro. Por cada habilidad: qué se vende, dónde, cómo empezar hoy, y un caso real. Dos niveles para no excluir por estrato ni educación. <i>Necesito tus casos reales para llenarlo.</i></div>
+      </section>
+
+      <section class="chapter" id="cap6" data-toc="Cómo te contratan de verdad" data-group="Parte III · Las rutas" data-draft="1">
+        <div class="ch-part">Parte III · Las rutas</div>
+        <div class="ch-num">Capítulo seis</div>
+        <h2>Cómo te contratan de verdad</h2>
+        <p class="deck">Lo transversal: portafolio, reputación, comunicación y cómo cobrarle al mundo.</p>
+        <div class="draft-banner"><b>Capítulo en escritura.</b> Lo que aplica a todas las rutas. La comunicación como la habilidad más profunda de todas.</div>
+      </section>
+
+      <section class="chapter" id="cap7" data-toc="El último muro: el idioma" data-group="Parte IV · Tu voz, todos los idiomas" data-draft="1">
+        <div class="ch-part">Parte IV · Tu voz, todos los idiomas</div>
+        <div class="ch-num">Capítulo siete</div>
+        <h2>El último muro: el idioma</h2>
+        <p class="deck">Por qué “aprende inglés” fue siempre un peaje, y por qué la IA de voz en tiempo real lo elimina.</p>
+        <div class="draft-banner"><b>Capítulo en escritura.</b> Clonación de voz + intérpretes de IA + NLP explicados para tu mamá. Por qué conservar TU voz lo cambia todo. Parlando.me / UniversoMarin como la prueba de que el futuro ya empezó.</div>
+      </section>
+
+      <section class="chapter" id="cap8" data-toc="Casos del futuro cercano" data-group="Parte IV · Tu voz, todos los idiomas" data-draft="1">
+        <div class="ch-part">Parte IV · Tu voz, todos los idiomas</div>
+        <div class="ch-num">Capítulo ocho</div>
+        <h2>Casos del futuro cercano</h2>
+        <p class="deck">El médico de pueblo atendiendo al mundo; la diseñadora cerrando clientes en seis idiomas con su propia voz.</p>
+        <div class="draft-banner"><b>Capítulo en escritura.</b> La visión: en dos años toda empresa tendrá un equipo de agentes IA. El humano no se reemplaza, se amplifica.</div>
+      </section>
+
+      <section class="chapter" id="cierre" data-toc="Tu turno" data-group="Cierre" data-draft="1">
+        <div class="ch-part">Cierre</div>
+        <div class="ch-num">Epílogo</div>
+        <h2>Tu turno</h2>
+        <p class="deck">La oportunidad es ahora. Y ahora ese caso de la primera página podrías ser tú.</p>
+        <div class="draft-banner"><b>En escritura.</b> Llamado a la acción concreto que devuelve a la escena de la apertura.</div>
+      </section>
+
+    </div>
+  </main>
+
+<script>
+  // Build TOC from sections
+  const sections = Array.from(document.querySelectorAll('[data-toc]'));
+  const nav = document.getElementById('tocnav');
+  let currentGroup = null, n = 0;
+  sections.forEach(sec => {
+    const group = sec.getAttribute('data-group');
+    if (group && group !== currentGroup) {
+      const h = document.createElement('h6'); h.textContent = group; nav.appendChild(h); currentGroup = group;
+    }
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    const isChapter = sec.classList.contains('chapter') && sec.querySelector('.ch-num');
+    if (isChapter) { n++; a.innerHTML = '<span class="n">' + n + '</span>' + sec.getAttribute('data-toc'); }
+    else { a.textContent = sec.getAttribute('data-toc'); }
+    if (sec.getAttribute('data-draft')) a.classList.add('draft');
+    a.onclick = () => document.body.classList.remove('menu-open');
+    nav.appendChild(a);
+  });
+
+  // Scroll spy
+  const links = Array.from(nav.querySelectorAll('a'));
+  const byId = id => links.find(l => l.getAttribute('href') === '#' + id);
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const l = byId(e.target.id); if (l) l.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+
+  // Reading theme cycle: paper -> sepia -> night
+  const themes = ['paper', 'sepia', 'night'];
+  let ti = 0;
+  function cycleTheme() {
+    ti = (ti + 1) % themes.length;
+    document.documentElement.setAttribute('data-theme', themes[ti]);
+    document.getElementById('themeBtn').textContent = ({paper:'◐ Claro', sepia:'◑ Sepia', night:'● Noche'})[themes[ti]];
+  }
+</script>
+</body>
+</html>
